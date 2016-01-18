@@ -1,3 +1,3 @@
 # dtrack-server
 
-This is a prototype Spring Boot data tracker applicaiton. 
+This is a prototype Spring Boot data tracker application. 
