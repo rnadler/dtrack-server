@@ -1,4 +1,4 @@
-package com.rdn;
+package com.rdn.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

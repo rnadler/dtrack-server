@@ -19,3 +19,9 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+/node/
+/node_modules/
+/src/main/webapp/scripts/app/app.constants.js
+/src/main/webapp/bower_components/
+*.log
+
