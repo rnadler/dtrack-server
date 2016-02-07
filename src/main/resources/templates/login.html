@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Data Tracker</title>
-</head>
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      th:include="layout :: page">
+<head></head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
+    <div th:fragment="content">
+        <div th:if="${param.error}">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form th:action="@{/login}" method="post" role="form" class="form-horizontal">
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">User Name:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username" name="username"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-2 control-label">Password:</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="password" name="password"/>
+                </div>
+            </div>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                </div></div>
+        </form>
+    </div>
 </body>
 </html>

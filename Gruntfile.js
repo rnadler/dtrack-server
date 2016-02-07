@@ -298,7 +298,7 @@ module.exports = function (grunt) {
             },
             dev: {
                 options: {
-                    dest: 'src/main/webapp/scripts/app/app.constants.js'
+                    dest: 'src/main/resources/static/scripts/app/app.constants.js'
                 },
                 constants: {
                     ENV: 'dev',
