@@ -6,23 +6,12 @@
 <body>
 <div th:fragment="content">
     <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
-    <div class="panel panel-default" ng-controller="MainCtrl">
-        <div class="panel-body">
-            <table class="table table-bordered">
-                <th>Type</th>
-                <th>Value</th>
-                <th>Time stamp</th>
-                <tr ng-repeat="d in data">
-                    <td>{{d.type}}</td>
-                    <td>{{d.value}}</td>
-                    <td>{{d.createdDateTime}}</td>
-                </tr>
-            </table>
-        </div>
+    <div>
+        <!--<form th:action="@{/logout}" method="post">-->
+            <!--<button type="submit" class="btn btn-primary">Sign Out</button>-->
+        <!--</form>-->
+        <a th:href="@{/logout}" class="btn btn-primary">Sign Out</a>
     </div>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-primary">Sign Out</button>
-        </form>
-    </div>
+</div>
 </body>
 </html>

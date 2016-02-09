@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         security.ignoring()
                 .antMatchers("/scripts/**/*.{js,html}")
                 .antMatchers("/bower_components/**")
+                .antMatchers("/images/**")
                 .antMatchers("/styles/**");
     }
 }

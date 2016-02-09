@@ -14,8 +14,33 @@
 </head>
 <body ng-app="dtrackApp" class="ng-cloak">
   <div class="container">
-      <div class="header">
-          <h3 class="text-info">Data Tracker</h3>
+      <!--<div class="header">-->
+          <!--<h3 class="text-info">Data Tracker</h3>-->
+      <!--</div>-->
+      <div class="navbar navbar-default navbar-static-top">
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" th:href="@{/}"><span>Data Tracker</span></a>
+              </div>
+              <div th:if="${#httpServletRequest.remoteUser != null}">
+                  <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                      <ul class="nav navbar-nav navbar-right">
+                          <li th:classappend="${#httpServletRequest.getRequestURI() == '/main' ? 'active':''}">
+                              <a th:href="@{/main}" th:inline="text">[[${#httpServletRequest.remoteUser}]] Home</a>
+                          </li>
+                          <li th:classappend="${#httpServletRequest.getRequestURI() == '/data' ? 'active':''}">
+                              <a th:href="@{/data}">Data</a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
       </div>
     <div class="well" th:include="this :: content"></div>
 
@@ -39,7 +64,7 @@
   <script src="scripts/app/app.js"></script>
   <script src="scripts/app/app.constants.js"></script>
   <script src="scripts/app/controllers/index.js"></script>
-  <script src="scripts/app/controllers/main.js"></script>
+  <script src="scripts/app/controllers/data.js"></script>
   <!-- endbuild -->
 
 </body>
