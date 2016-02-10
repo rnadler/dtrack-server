@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       th:include="layout :: page">
 <head></head>
 <body>
 <div th:fragment="content">
     <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
     <div>
-        <!--<form th:action="@{/logout}" method="post">-->
-            <!--<button type="submit" class="btn btn-primary">Sign Out</button>-->
-        <!--</form>-->
-        <a th:href="@{/logout}" class="btn btn-primary">Sign Out</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-primary">Sign Out</button>
+        </form>
     </div>
 </div>
 </body>
