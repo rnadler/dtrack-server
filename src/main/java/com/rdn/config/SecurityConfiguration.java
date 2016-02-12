@@ -22,6 +22,9 @@ import java.io.IOException;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private Http401UnauthorizedEntryPoint authenticationEntryPoint;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -31,7 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").defaultSuccessUrl("/main").permitAll()
                 .and()
                 .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll()
-                .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+                .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint);
     }
 
     @Autowired

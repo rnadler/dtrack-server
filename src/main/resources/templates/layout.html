@@ -31,7 +31,7 @@
               <div th:if="${#httpServletRequest.remoteUser != null}">
                   <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                       <ul class="nav navbar-nav navbar-right">
-                          <li th:classappend="${#httpServletRequest.getRequestURI() == '/main' ? 'active':''}">
+                          <li th:classappend="${#httpServletRequest.getRequestURI() == '/main' || #httpServletRequest.getRequestURI() == '/' ? 'active':''}">
                               <a th:href="@{/main}" th:inline="text">Home</a>
                           </li>
                           <li th:classappend="${#httpServletRequest.getRequestURI() == '/data' ? 'active':''}">
