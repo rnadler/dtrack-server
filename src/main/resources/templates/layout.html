@@ -32,10 +32,10 @@
                   <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                       <ul class="nav navbar-nav navbar-right">
                           <li th:classappend="${#httpServletRequest.getRequestURI() == '/main' || #httpServletRequest.getRequestURI() == '/' ? 'active':''}">
-                              <a th:href="@{/main}" th:inline="text">Home</a>
+                              <a th:href="@{/main}" th:inline="text"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
                           </li>
                           <li th:classappend="${#httpServletRequest.getRequestURI() == '/data' ? 'active':''}">
-                              <a th:href="@{/data}">Data</a>
+                              <a th:href="@{/data}"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Data</a>
                           </li>
                       </ul>
                   </div>
