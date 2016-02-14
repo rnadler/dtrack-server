@@ -4,10 +4,10 @@
 <head></head>
 <body>
     <div th:fragment="content">
-        <div th:if="${param.error}">
+        <div th:if="${param.error}" id="invalidMessage">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}">
+        <div th:if="${param.logout}" id="logoutMessage">
             You have been logged out.
         </div>
         <form th:action="@{/login}" method="post" role="form" class="form-horizontal">
@@ -26,7 +26,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Sign In</button>
+                        <button type="submit" class="btn btn-primary" id="signin">Sign In</button>
                 </div></div>
         </form>
     </div>

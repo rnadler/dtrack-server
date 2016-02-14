@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.List;
+
 public class LoginPage {
 
     @Getter
@@ -15,6 +17,18 @@ public class LoginPage {
     @Getter
     @FindBy(how = How.NAME, using = "password")
     private WebElement password;
+
+    @Getter
+    @FindBy(how = How.ID, using = "signin")
+    private WebElement signInButton;
+
+    @Getter
+    @FindBy(how = How.ID, using = "invalidMessage")
+    private WebElement invalidMessage;
+
+    @Getter
+    @FindBy(how = How.ID, using = "logoutMessage")
+    private WebElement logoutMessage;
 
     private final WebDriver driver;
 

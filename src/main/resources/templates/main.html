@@ -7,7 +7,7 @@
     <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
     <div>
         <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-primary">Sign Out</button>
+            <button type="submit" class="btn btn-primary" id="signout">Sign Out</button>
         </form>
     </div>
 </div>
