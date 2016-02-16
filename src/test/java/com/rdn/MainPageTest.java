@@ -20,35 +20,24 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DtrackApplication.class)
 @SeleniumTest
-public class LoginPageTest {
+public class MainPageTest {
 
     @Autowired
     private WebDriver driver;
 
     private LoginPage loginPage;
+    private MainPage mainPage;
 
     @Before
     public void setUp() throws Exception {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
+        mainPage = PageFactory.initElements(driver, MainPage.class);
     }
 
     @Test
-    public void hasLoginPageElements() {
-        assertThat(loginPage.getTitle(), is("Data Tracker"));
-        assertThat(loginPage.getUserName().getText(), is(""));
-        assertThat(loginPage.getPassword().getText(), is(""));
-    }
-    @Test
-    public void testFailedLoginMessage() {
-        loginPage.getUserName().sendKeys("badusername");
-        loginPage.getPassword().sendKeys("badpassword");
-        loginPage.getSignInButton().click();
-        assertThat(loginPage.getInvalidMessage().getText(), is("Invalid username and password."));
-    }
-
-    public static void loginSucessfully(LoginPage page) {
-        page.getUserName().sendKeys("user");
-        page.getPassword().sendKeys("password");
-        page.getSignInButton().click();
+    public void testLogoutMessage() {
+        LoginPageTest.loginSucessfully(loginPage);
+        mainPage.getSignoutButton().click();
+        assertThat(loginPage.getLogoutMessage().getText(), is("You have been logged out."));
     }
 }

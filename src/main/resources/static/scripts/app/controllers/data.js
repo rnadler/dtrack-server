@@ -9,6 +9,10 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http) {
     $scope.checkKeyUp = function (event) {
         return event.keyCode == 13 && $scope.ok();
     };
+    $scope.clearSearchTerm = function () {
+        $scope.searchTerm = '';
+        $scope.ok();
+    };
     $scope.getData = function (search) {
         var searchParam = '';
         if (search !== undefined && search.length > 0) {

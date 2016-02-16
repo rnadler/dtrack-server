@@ -2,6 +2,7 @@ package com.rdn.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.TestExecutionListeners;
 
 import java.lang.annotation.*;
@@ -12,6 +13,7 @@ import static org.springframework.test.context.TestExecutionListeners.MergeMode.
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @TestExecutionListeners(listeners = SeleniumTestExecutionListener.class, mergeMode = MERGE_WITH_DEFAULTS)
+@WebIntegrationTest(value = "server.port=9000")
 public @interface SeleniumTest {
 
     Class<? extends WebDriver> driver() default FirefoxDriver.class;
