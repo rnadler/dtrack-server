@@ -1,6 +1,28 @@
 'use strict';
 
 angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http) {
+    var compare = function(a,b) {
+        if (a[0] < b[0])
+            return -1;
+        else if (a[0] > b[0])
+            return 1;
+        else
+            return 0;
+    },
+    loadChartValues = function() {
+        var i,
+            values = [],
+            seriesName = $scope.searchTerm === '' ? 'All' : $scope.searchTerm;
+        for (i = 0; i < $scope.data.length; i++) {
+            values.push([Date.parse($scope.data[i].createdDateTime), $scope.data[i].value]);
+        }
+        values.sort(compare);
+        $scope.chartConfig.series = [{
+            data: values,
+            color: 'black',
+            name: seriesName
+        }];
+    };
     $scope.searchTerm = '';
 
     $scope.ok = function () {
@@ -20,7 +42,23 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http) {
         }
         $http.get('/entries/' + searchParam).success(function (data) {
             $scope.data = data['_embedded']['entries'];
+            loadChartValues();
         })
+    };
+    $scope.chartConfig = {
+        options: {
+            chart: {
+                type: 'line',
+                zoomType: 'x'
+            }
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        loading: false
     };
     $scope.getData();
 });

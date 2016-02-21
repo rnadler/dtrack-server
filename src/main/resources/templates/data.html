@@ -29,16 +29,37 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered">
-            <th>Type</th>
-            <th>Value</th>
-            <th>Time stamp</th>
-            <tr ng-repeat="d in data">
-                <td>{{d.type}}</td>
-                <td>{{d.value}}</td>
-                <td>{{d.createdDateTime}}</td>
-            </tr>
-        </table>
+        <uib-tabset>
+            <uib-tab>
+                <tab-heading id="chart">
+                    <strong>Chart</strong>
+                </tab-heading>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <highchart id="chart1" config="chartConfig" class="span10"></highchart>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab>
+                <tab-heading id="table">
+                    <strong>Table</strong>
+                </tab-heading>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                            <th>Type</th>
+                            <th>Value</th>
+                            <th>Time stamp</th>
+                            <tr ng-repeat="d in data">
+                                <td>{{d.type}}</td>
+                                <td>{{d.value}}</td>
+                                <td>{{d.createdDateTime}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
     </div>
 </div>
 </body>
