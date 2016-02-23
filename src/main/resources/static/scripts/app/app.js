@@ -1,5 +1,7 @@
 "use strict";
 angular.module('dtrackApp', [
+        'ngResource',
+        'ngAnimate',
         'ui.bootstrap',
         'highcharts-ng'
     ])

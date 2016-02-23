@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http) {
+angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $timeout) {
     var compare = function(a,b) {
         if (a[0] < b[0])
             return -1;
@@ -16,13 +16,23 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http) {
         for (i = 0; i < $scope.data.length; i++) {
             values.push([Date.parse($scope.data[i].createdDateTime), $scope.data[i].value]);
         }
+        showAlert($scope.dataLoadSuccessAlert, values.length);
         values.sort(compare);
         $scope.chartConfig.series = [{
             data: values,
             color: 'black',
             name: seriesName
         }];
+    },
+    showAlert = function (alert, message) {
+        alert.message = message;
+        alert.enabled = true;
+        $timeout(function () {
+            alert.enabled = false;
+            alert.message = undefined;
+        }, 5000);
     };
+    $scope.dataLoadSuccessAlert = {enabled: false};
     $scope.searchTerm = '';
 
     $scope.ok = function () {
@@ -38,12 +48,19 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http) {
     $scope.getData = function (search) {
         var searchParam = '';
         if (search !== undefined && search.length > 0) {
+            $scope.currentSearchTerm = search;
             searchParam = 'search/findByType?type=' + search;
+        } else {
+            $scope.currentSearchTerm = '';
         }
-        $http.get('/entries/' + searchParam).success(function (data) {
-            $scope.data = data['_embedded']['entries'];
-            loadChartValues();
-        })
+        $timeout(function() {
+            $scope.$apply(function () {
+                $http.get('/entries/' + searchParam).success(function (data) {
+                    $scope.data = data['_embedded']['entries'];
+                    loadChartValues();
+                });
+            });
+        });
     };
     $scope.chartConfig = {
         options: {

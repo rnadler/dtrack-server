@@ -6,6 +6,7 @@
 <body>
 <div th:fragment="content">
     <div class="panel panel-default" ng-controller="DataCtrl">
+        <uib-alert type="success" ng-hide="dataLoadSuccessAlert.enabled === false">Successfully loaded {{dataLoadSuccessAlert.message}} data values!</uib-alert>
         <div class="panel-body">
             <div class="col-md-4 pull-right">
                 <form role="form">
@@ -20,7 +21,7 @@
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="ok()">
+                                <button class="btn btn-default" type="button" ng-click="ok()" ng-disabled="searchTerm === currentSearchTerm">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                 </button>
                             </span>
