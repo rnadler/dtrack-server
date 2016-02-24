@@ -16,12 +16,12 @@
                                    ng-keyup="checkKeyUp($event)"/>
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button" ng-click="clearSearchTerm()"
-                                        ng-disabled="searchTerm.length === 0">
+                                        ng-disabled="searchTerm.length === 0" id="removeButton">
                                     <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
                                 </button>
                             </span>
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" ng-click="ok()" ng-disabled="searchTerm === currentSearchTerm">
+                                <button class="btn btn-default" type="button" ng-click="ok()" ng-disabled="searchTerm === currentSearchTerm" id="searchButton">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                                 </button>
                             </span>

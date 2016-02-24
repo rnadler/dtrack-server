@@ -75,7 +75,12 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $tim
         xAxis: {
             type: 'datetime'
         },
-        loading: false
+        loading: false,
+        func: function(chart) {
+            $timeout(function() {
+                chart.reflow();
+            }, 0);
+        }
     };
     $scope.getData();
 });
