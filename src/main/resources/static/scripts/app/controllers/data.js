@@ -23,6 +23,7 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $tim
             color: 'black',
             name: seriesName
         }];
+        $scope.chartConfig.getHighcharts().zoomOut();
     };
     $scope.dataLoadSuccessAlert = {enabled: false};
     $scope.searchTerm = '';
