@@ -16,21 +16,13 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $tim
         for (i = 0; i < $scope.data.length; i++) {
             values.push([Date.parse($scope.data[i].createdDateTime), $scope.data[i].value]);
         }
-        showAlert($scope.dataLoadSuccessAlert, values.length);
+        showAlert($timeout, $scope.dataLoadSuccessAlert, values.length);
         values.sort(compare);
         $scope.chartConfig.series = [{
             data: values,
             color: 'black',
             name: seriesName
         }];
-    },
-    showAlert = function (alert, message) {
-        alert.message = message;
-        alert.enabled = true;
-        $timeout(function () {
-            alert.enabled = false;
-            alert.message = undefined;
-        }, 5000);
     };
     $scope.dataLoadSuccessAlert = {enabled: false};
     $scope.searchTerm = '';

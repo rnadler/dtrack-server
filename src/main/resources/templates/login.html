@@ -4,11 +4,9 @@
 <head></head>
 <body>
     <div th:fragment="content">
-        <div th:if="${param.error}" id="invalidMessage">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}" id="logoutMessage">
-            You have been logged out.
+        <div ng-controller="LoginAlertCtrl">
+                <uib-alert type="danger" ng-hide="errorAlert.enabled === false" id="invalidMessage">Invalid username and password.</uib-alert>
+                <uib-alert type="success" ng-hide="logoutAlert.enabled === false" id="logoutMessage">You have been logged out.</uib-alert>
         </div>
         <form th:action="@{/login}" method="post" role="form" class="form-horizontal">
             <div class="form-group">
