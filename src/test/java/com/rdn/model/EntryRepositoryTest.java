@@ -27,11 +27,14 @@ public class EntryRepositoryTest {
     public void setUp() {
         entryRepository.deleteAll();
         now = LocalDateTime.now();
-        for (int i = 0; i < QTY; i++) {
-            Entry entry = new Entry();
-            entry.setCreatedDateTime(now.minusMinutes(i));
-            entry.setType( i%2 == 0 ? "even" : "odd");
-            entry.setValue(i);
+        createDataForUser("user", 0, QTY/2);
+        createDataForUser("admin", QTY/2, QTY/2);
+    }
+
+    private void createDataForUser(String user, int start, int count) {
+        for (int i = start; i < start + count; i++) {
+            Entry entry = new Entry(user, now.minusMinutes(i), i%2 == 0 ? "even" : "odd", i);
+            entry.setUnits("sec");
             entryRepository.save(entry);
         }
     }
@@ -51,5 +54,14 @@ public class EntryRepositoryTest {
         assertThat(entries.size(), is(QTY/2));
         entries = entryRepository.findByType("odd");
         assertThat(entries.size(), is(QTY/2));
+    }
+    @Test
+    public void testEntryFindByUserAndType() {
+        List<Entry> entries = entryRepository.findByUserAndType("user", "even");
+        assertThat(entries.size(), is(QTY/4));
+        assertThat(entries.get(0).getValue(), is(0L));
+        entries = entryRepository.findByUserAndType("admin", "even");
+        assertThat(entries.size(), is(QTY/4));
+        assertThat(entries.get(0).getValue(), is(QTY/2L));
     }
 }
