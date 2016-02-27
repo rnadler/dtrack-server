@@ -56,6 +56,15 @@ public class EntryRepositoryTest {
         assertThat(entries.size(), is(QTY/2));
     }
     @Test
+    public void testEntryFindByUser() {
+        List<Entry> entries = entryRepository.findByUser("user");
+        assertThat(entries.size(), is(QTY/2));
+        assertThat(entries.get(0).getValue(), is(0L));
+        entries = entryRepository.findByUser("admin");
+        assertThat(entries.size(), is(QTY/2));
+        assertThat(entries.get(0).getValue(), is(QTY/2L));
+    }
+    @Test
     public void testEntryFindByUserAndType() {
         List<Entry> entries = entryRepository.findByUserAndType("user", "even");
         assertThat(entries.size(), is(QTY/4));
