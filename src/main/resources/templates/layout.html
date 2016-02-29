@@ -29,7 +29,8 @@
                   <a class="navbar-brand" th:href="@{/}"><span>Data Tracker</span></a>
               </div>
               <div th:if="${#httpServletRequest.remoteUser != null}">
-                  <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                  <div class="collapse navbar-collapse" id="navbar-ex-collapse" ng-controller="navBarCtrl"
+                       th:attr="ng-init='init(\''+${#httpServletRequest.remoteUser}+'\');'">
                       <ul class="nav navbar-nav navbar-right">
                           <li th:classappend="${#httpServletRequest.getRequestURI() == '/main' || #httpServletRequest.getRequestURI() == '/' ? 'active':''}">
                               <a th:href="@{/main}" th:inline="text"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
@@ -67,11 +68,13 @@
   <!--<script src="scripts/app/app.js"></script>-->
   <script src="scripts/vendors/highcharts.js"></script>
   <script src="scripts/app/util/utils.js"></script>
+  <script src="scripts/app/services/userService.js"></script>
   <script src="scripts/app/app.js"></script>
   <script src="scripts/app/app.constants.js"></script>
   <script src="scripts/app/controllers/index.js"></script>
   <script src="scripts/app/controllers/data.js"></script>
   <script src="scripts/app/controllers/loginAlert.js"></script>
+  <script src="scripts/app/controllers/navBar.js"></script>
   <!-- endbuild -->
 
 </body>
