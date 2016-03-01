@@ -32,12 +32,16 @@ public class Entry {
 
     @Getter
     @NonNull
-    private long value;
+    private String value;
 
     @Getter
     @Setter
     private String units;
+
+    public double getDoubleValue() {
+        return Double.parseDouble(value);
+    }
 }
 
-// $ curl -i -X POST -H "Content-Type:application/json" -d '{  "createdDateTime" : "2015-10-20T01:30:00.000", "type" : "sda1",  "value" : 20 }' http://localhost:8080/entries
+// $ curl -i -X POST -H "Content-Type:application/json" -d '{  "createdDateTime" : "2015-10-20T01:30:00.000", "type" : "sda1",  "value" : "20.2" }' http://localhost:8080/entries
 // $ curl -X DELETE http://localhost:8080/entries/569ad677c8300779f47a8ce6

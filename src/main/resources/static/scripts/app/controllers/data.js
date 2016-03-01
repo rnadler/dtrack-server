@@ -14,7 +14,7 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $tim
             values = [],
             seriesName = $scope.searchTerm === '' ? 'All' : $scope.searchTerm;
         for (i = 0; i < $scope.data.length; i++) {
-            values.push([Date.parse($scope.data[i].createdDateTime), $scope.data[i].value]);
+            values.push([Date.parse($scope.data[i].createdDateTime), parseFloat($scope.data[i].value)]);
         }
         showAlert($timeout, $scope.dataLoadSuccessAlert, values.length);
         values.sort(compare);
