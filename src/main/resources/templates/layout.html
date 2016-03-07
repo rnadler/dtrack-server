@@ -43,6 +43,9 @@
               </div>
           </div>
       </div>
+      <div ng-controller="notificationCtrl">
+          <uib-alert type="success" ng-hide="notificationAlert.enabled === false" id="notificationMessage">{{notificationAlert.message}}</uib-alert>
+      </div>
     <div class="well" th:include="this :: content"></div>
 
       <div class="footer" ng-controller="IndexCtrl">
@@ -62,6 +65,7 @@
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+  <script src="bower_components/ng-stomp/dist/ng-stomp.standalone.min.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
@@ -75,6 +79,8 @@
   <script src="scripts/app/controllers/data.js"></script>
   <script src="scripts/app/controllers/loginAlert.js"></script>
   <script src="scripts/app/controllers/navBar.js"></script>
+  <script src="scripts/app/controllers/notification.js"></script>
+  <script src="scripts/app/controllers/update.js"></script>
   <!-- endbuild -->
 
 </body>
