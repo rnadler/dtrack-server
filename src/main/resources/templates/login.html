@@ -4,10 +4,7 @@
 <head></head>
 <body>
     <div th:fragment="content">
-        <div ng-controller="LoginAlertCtrl">
-                <uib-alert type="danger" ng-hide="errorAlert.enabled === false" id="invalidMessage">Invalid username and password.</uib-alert>
-                <uib-alert type="success" ng-hide="logoutAlert.enabled === false" id="logoutMessage">You have been logged out.</uib-alert>
-        </div>
+        <log-alert></log-alert>
         <form th:action="@{/login}" method="post" role="form" class="form-horizontal">
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label">User Name:</label>

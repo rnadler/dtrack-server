@@ -1,6 +1,6 @@
 (function (angular) {
     'use strict';
-    function AppFooterController($scope, $element, $attrs, VERSION) {
+    function AppFooterController(VERSION) {
         var ctrl = this;
         ctrl.dtrackVersion = VERSION;
     }
