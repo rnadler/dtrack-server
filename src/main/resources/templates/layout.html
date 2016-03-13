@@ -47,14 +47,7 @@
           <uib-alert type="success" ng-hide="notificationAlert.enabled === false" id="notificationMessage">{{notificationAlert.message}}</uib-alert>
       </div>
     <div class="well" th:include="this :: content"></div>
-
-      <div class="footer" ng-controller="IndexCtrl">
-          <div class="container text-center"><small>
-                  &copy; dTrack 2016<br/>
-                  Version: <strong>{{dtrackVersion}}</strong>
-                  </small>
-          </div>
-      </div>
+      <app-footer></app-footer>
   </div>
 
   <!-- build:js scripts/vendor.js -->
@@ -75,12 +68,12 @@
   <script src="scripts/app/services/userService.js"></script>
   <script src="scripts/app/app.js"></script>
   <script src="scripts/app/app.constants.js"></script>
-  <script src="scripts/app/controllers/index.js"></script>
   <script src="scripts/app/controllers/data.js"></script>
   <script src="scripts/app/controllers/loginAlert.js"></script>
   <script src="scripts/app/controllers/navBar.js"></script>
   <script src="scripts/app/controllers/notification.js"></script>
   <script src="scripts/app/controllers/update.js"></script>
+  <script src="scripts/app/components/appFooter/appFooter.js"></script>
   <!-- endbuild -->
 
 </body>

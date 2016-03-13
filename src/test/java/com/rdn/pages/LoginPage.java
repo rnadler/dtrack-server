@@ -30,6 +30,10 @@ public class LoginPage {
     @FindBy(how = How.ID, using = "logoutMessage")
     private WebElement logoutMessage;
 
+    @Getter
+    @FindBy(id = "version")
+    private WebElement version;
+
     private final WebDriver driver;
 
     public LoginPage(WebDriver driver) {

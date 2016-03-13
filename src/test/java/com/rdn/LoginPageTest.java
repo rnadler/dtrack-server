@@ -37,6 +37,7 @@ public class LoginPageTest {
         assertThat(loginPage.getTitle(), is("Data Tracker"));
         assertThat(loginPage.getUserName().getText(), is(""));
         assertThat(loginPage.getPassword().getText(), is(""));
+        assertThat(loginPage.getVersion().getText().contains("."), is(true));
     }
     @Test
     public void testFailedLoginMessage() {
