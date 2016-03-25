@@ -19,7 +19,7 @@ securityDefinitions:
   basicAuth:
     type: basic
     description: HTTP Basic Authentication. Works over `HTTP` and `HTTPS`
-basePath: /api
+basePath: /
 schemes:
   - http
 consumes:
@@ -29,7 +29,7 @@ produces:
 paths:
   /entries:
     get:
-      description: Returns all entries from the system that the user has access to
+      description: Returns all entries from the system
       operationId: findEntries
       security:
         - basicAuth: []
@@ -39,16 +39,16 @@ paths:
         '200':
           description: entry response
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/entry'
+            $ref: '#/definitions/entry_array'
         default:
           description: unexpected error
           schema:
             $ref: '#/definitions/errorModel'
     post:
-      description: Creates a new entry.  Duplicates are allowed
+      description: Creates a new entry.
       operationId: addEntry
+      security:
+        - basicAuth: []
       produces:
         - application/json
       parameters:
@@ -69,13 +69,12 @@ paths:
             $ref: '#/definitions/errorModel'
   '/entries/{id}':
     get:
-      description: 'Returns a user based on a single ID, if the user does not have access to the entry'
+      description: 'Returns a user based on a single ID.'
       operationId: findentryById
+      security:
+        - basicAuth: []
       produces:
         - application/json
-        - application/xml
-        - text/xml
-        - text/html
       parameters:
         - name: id
           in: path
@@ -95,6 +94,8 @@ paths:
     delete:
       description: deletes a single entry based on the ID supplied
       operationId: deleteEntry
+      security:
+        - basicAuth: []
       parameters:
         - name: id
           in: path
@@ -105,6 +106,28 @@ paths:
       responses:
         '204':
           description: entry deleted
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/errorModel'
+  /entries/search/findByUser:
+    get:
+      description: Returns all entries that the user has access to
+      operationId: findEntriesByUser
+      security:
+        - basicAuth: []
+      parameters:
+        - name: user
+          in: query
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: entries response
+          schema:
+            $ref: '#/definitions/entry_array'
         default:
           description: unexpected error
           schema:
@@ -128,6 +151,39 @@ definitions:
         type: string
       createdDateTime:
         type: string
+      doubleValue:
+        type: double
+      _links:
+        type: object
+        properties:
+          self:
+            type: object
+            properties:
+              href:
+                type: string
+          entry:
+            type: object
+            properties:
+              href:
+                type: string
+  entry_array:
+    type: object
+    properties:
+     _embedded:
+        type: object
+        properties:
+          entries:
+            type: array
+            items:
+             $ref: '#/definitions/entry'
+     _links:
+        type: object
+        properties:
+          self:
+            type: object
+            properties:
+              href:
+                type: string
   errorModel:
     type: object
     required:
