@@ -13,6 +13,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -50,6 +51,11 @@ public class EntryRepositoryTest {
         return (long) entry.getDoubleValue();
     }
 
+    private List<Entry> sortByCreatedDateTime(List<Entry> entryList) {
+        Collections.sort(entryList, (a, b) -> b.getCreatedDateTime().compareTo(a.getCreatedDateTime()));
+        return entryList;
+    }
+
     @Test
     public void testEntrySave() {
         List<Entry> all = entryRepository.findAll();
@@ -68,21 +74,19 @@ public class EntryRepositoryTest {
     }
     @Test
     public void testEntryFindByUser() {
-        List<Entry> entries = entryRepository.findByUser("user");
+        List<Entry> entries = sortByCreatedDateTime(entryRepository.findByUser("user"));
         assertThat(entries.size(), is(QTY/2));
-        // TODO: Fix ordering issue (T-27) -- first 3 user entries are after the all the admin entries!?!
-        //assertThat(getEntryValueAsLong(entries.get(0)), is(0L));
-        entries = entryRepository.findByUser("admin");
+        assertThat(getEntryValueAsLong(entries.get(0)), is(0L));
+        entries = sortByCreatedDateTime(entryRepository.findByUser("admin"));
         assertThat(entries.size(), is(QTY/2));
         assertThat(getEntryValueAsLong(entries.get(0)), is(QTY/2L));
     }
     @Test
     public void testEntryFindByUserAndType() {
-        List<Entry> entries = entryRepository.findByUserAndType("user", "even");
+        List<Entry> entries = sortByCreatedDateTime(entryRepository.findByUserAndType("user", "even"));
         assertThat(entries.size(), is(QTY/4));
-        // TODO: Same as above
-        //assertThat(getEntryValueAsLong(entries.get(0)), is(0L));
-        entries = entryRepository.findByUserAndType("admin", "even");
+        assertThat(getEntryValueAsLong(entries.get(0)), is(0L));
+        entries = sortByCreatedDateTime(entryRepository.findByUserAndType("admin", "even"));
         assertThat(entries.size(), is(QTY/4));
         assertThat(getEntryValueAsLong(entries.get(0)), is(QTY/2L));
     }
