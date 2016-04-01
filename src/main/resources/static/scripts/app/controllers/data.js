@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $timeout, User) {
+angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $timeout) {
     var compare = function(a,b) {
         if (a[0] < b[0])
             return -1;
@@ -39,19 +39,17 @@ angular.module('dtrackApp').controller('DataCtrl', function ($scope, $http, $tim
         $scope.ok();
     };
     $scope.getData = function (search) {
-        var searchParam = '',
-            user = User.getUser();
+        var typeSearch = '';
         if (search !== undefined && search.length > 0) {
             $scope.currentSearchTerm = search;
-            searchParam = 'search/findByUserAndType?user=' + user + '&type=' + search;
+            typeSearch = '/type/' + search;
         } else {
             $scope.currentSearchTerm = '';
-            searchParam = 'search/findByUser?user=' + user;
         }
         $timeout(function() {
             $scope.$apply(function () {
-                $http.get('/entries/' + searchParam).success(function (data) {
-                    $scope.data = data['_embedded']['entries'];
+                $http.get('/api/v1/entries' + typeSearch).success(function (data) {
+                    $scope.data = data;
                     loadChartValues();
                 });
             });

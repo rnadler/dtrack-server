@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login").defaultSuccessUrl("/main").permitAll()
                 .and()
                 .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll()
-                .and().csrf().ignoringAntMatchers("/entries")
+                .and().csrf().ignoringAntMatchers("/entries", "/api/**")
                 .and().addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint);
