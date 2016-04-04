@@ -3,6 +3,7 @@ package com.rdn.controllers;
 
 import com.rdn.model.Entry;
 import com.rdn.model.EntryRepository;
+import com.rdn.services.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,9 @@ class EntriesController {
     @Autowired
     private EntryRepository entryRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<Entry> add(Authentication authentication, @RequestBody Entry input) {
         String userId = authentication.getName();
@@ -34,6 +38,7 @@ class EntriesController {
         httpHeaders.setLocation(ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
                 .buildAndExpand(result.getId()).toUri());
+        notificationService.sendEntryNotification(result);
         return new ResponseEntity<>(result, httpHeaders, HttpStatus.CREATED);
 
     }

@@ -12,6 +12,15 @@ public class MainPage {
     @FindBy(id = "signout")
     private WebElement signoutButton;
 
+    @Getter
+    @FindBy(id = "sendNotification")
+    private WebElement sendNotificationButton;
+
+    @Getter
+    @FindBy(id = "notificationMessage")
+    private WebElement notificationMessage;
+
+
     private final WebDriver driver;
 
     public MainPage(WebDriver driver) {

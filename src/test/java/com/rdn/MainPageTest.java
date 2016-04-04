@@ -40,4 +40,13 @@ public class MainPageTest {
         mainPage.getSignoutButton().click();
         assertThat(loginPage.getLogoutMessage().getText(), is("You have been logged out."));
     }
+
+    @Test
+    public void testNotification() throws InterruptedException {
+        LoginPageTest.loginSucessfully(loginPage);
+        Thread.sleep(1000); // time for websocket/STOMP subscription setup
+        mainPage.getSendNotificationButton().click();
+        Thread.sleep(1000); // time for server notification and UI update
+        assertThat(mainPage.getNotificationMessage().getText().startsWith("Notification received"), is(true));
+    }
 }

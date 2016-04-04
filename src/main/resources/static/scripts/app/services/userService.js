@@ -11,4 +11,7 @@ angular.module('UserService', []).service('User', function() {
     this.getUser = function() {
         return this.user;
     };
+    this.isLoggedIn = function () {
+        return this.user !== undefined;
+    }
 });

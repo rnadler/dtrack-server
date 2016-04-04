@@ -1,12 +1,9 @@
 'use strict';
 
-angular.module('dtrackApp').controller('updateCtrl', function($scope, $timeout, $log, $stomp, User) {
-    var user = User.getUser();
+angular.module('dtrackApp').controller('updateCtrl', function($scope, $stomp, User) {
     $scope.sendUpdate = function() {
-        if (user === undefined) {
-            $log.error('sendUpdate: User is not defined!');
-            return;
+        if (User.isLoggedIn()) {
+            $stomp.send('/app/update', { user: '', type: 'odd' }, {});
         }
-        $stomp.send('/app/update', { user: user, type: 'odd' }, {});
     };
 });
