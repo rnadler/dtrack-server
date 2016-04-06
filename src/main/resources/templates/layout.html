@@ -43,9 +43,7 @@
               </div>
           </div>
       </div>
-      <div ng-controller="notificationCtrl">
-          <uib-alert type="success" ng-hide="notificationAlert.enabled === false" id="notificationMessage">{{notificationAlert.message}}</uib-alert>
-      </div>
+      <notification-alert></notification-alert>
     <div class="well" th:include="this :: content"></div>
       <app-footer></app-footer>
   </div>
@@ -70,10 +68,10 @@
   <script src="scripts/app/app.constants.js"></script>
   <script src="scripts/app/controllers/data.js"></script>
   <script src="scripts/app/controllers/navBar.js"></script>
-  <script src="scripts/app/controllers/notification.js"></script>
   <script src="scripts/app/controllers/update.js"></script>
   <script src="scripts/app/components/appFooter/appFooter.js"></script>
   <script src="scripts/app/components/logAlert/logAlert.js"></script>
+  <script src="scripts/app/components/notificationAlert/notificationAlert.js"></script>
   <!-- endbuild -->
 
 </body>
