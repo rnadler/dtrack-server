@@ -2,7 +2,7 @@ package com.rdn.controllers;
 
 
 import com.rdn.model.Entry;
-import com.rdn.model.EntryRepository;
+import com.rdn.repositories.EntryRepository;
 import com.rdn.services.NotificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,7 @@
-package com.rdn.model;
+package com.rdn.repositories;
 
 
+import com.rdn.model.Entry;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
 
