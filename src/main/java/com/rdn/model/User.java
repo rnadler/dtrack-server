@@ -20,7 +20,7 @@ import java.util.Set;
  */
 
 @Data
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class User extends AbstractAuditingEntity implements Serializable {
 
     @Id
