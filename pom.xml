@@ -65,7 +65,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.49.0</version>
+            <version>2.53.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -113,6 +113,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.rimerosolutions.maven.plugins</groupId>
+                <artifactId>wrapper-maven-plugin</artifactId>
+                <version>0.0.4</version>
+                <configuration>
+                    <mavenVersion>3.3.9</mavenVersion>
+                </configuration>
             </plugin>
         </plugins>
     </build>

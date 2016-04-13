@@ -2,6 +2,8 @@ package com.rdn.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.rdn.model.util.LocalDateTimeDeserializer;
+import com.rdn.model.util.LocalDateTimeSerializer;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 

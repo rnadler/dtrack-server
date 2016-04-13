@@ -24,4 +24,5 @@ buildNumber.properties
 /src/main/resources/static/scripts/app/app.constants.js
 /src/main/resources/static/bower_components/
 *.log
+maven/
 
