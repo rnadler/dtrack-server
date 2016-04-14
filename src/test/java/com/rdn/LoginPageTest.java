@@ -1,7 +1,6 @@
 package com.rdn;
 
 import com.rdn.pages.LoginPage;
-import com.rdn.pages.MainPage;
 import com.rdn.utils.SeleniumTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -48,8 +46,9 @@ public class LoginPageTest {
     }
 
     public static void loginSucessfully(LoginPage page) {
-        page.getUserName().sendKeys("user");
-        page.getPassword().sendKeys("password");
+        String user = "user";
+        page.getUserName().sendKeys(user);
+        page.getPassword().sendKeys(user);
         page.getSignInButton().click();
     }
 }

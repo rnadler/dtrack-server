@@ -29,7 +29,8 @@ public class EntriesControllerTest {
 
     @Before
     public void setUp() {
-        rest = new TestRestTemplate("user", "password");
+        String user = "user";
+        rest = new TestRestTemplate(user, user);
         now = LocalDateTime.now();
     }
 
@@ -64,7 +65,8 @@ public class EntriesControllerTest {
     @Test
     public void shouldNotAllowCrossUserEntryAccess() {
         URI entryUri = createEntry();
-        TestRestTemplate adminRest = new TestRestTemplate("admin", "password");
+        String admin = "admin";
+        TestRestTemplate adminRest = new TestRestTemplate(admin, admin);
         ResponseEntity<Entry> entryResponse = adminRest.getForEntity(entryUri, Entry.class);
         assertThat(entryResponse.getStatusCode(), is(HttpStatus.OK));
         assertThat(entryResponse.getBody() == null, is(true));
