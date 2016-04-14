@@ -21,9 +21,9 @@ import static org.hamcrest.core.Is.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DtrackApplication.class)
-@WebIntegrationTest("server.port=8080")
+@WebIntegrationTest("server.port=9000")
 public class EntriesControllerTest {
-    private final String BASE_URL = "http://localhost:8080/api/v1/entries";
+    private final String BASE_URL = "http://localhost:9000/api/v1/entries";
     private RestTemplate rest;
     private LocalDateTime now;
 
