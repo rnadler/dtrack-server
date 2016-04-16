@@ -1,6 +1,8 @@
 "use strict";
 angular.module('dtrackApp', [
         'UserService',
+        'AuthService',
+        'RegisterService',
         'ngResource',
         'ngAnimate',
         'ui.bootstrap',
