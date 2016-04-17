@@ -9,7 +9,6 @@ angular.module('AuthService', []).service('Auth', function(Register) {
             },
             function (err) {
                 console.log(err);
-                this.logout();
                 return cb(err);
             }.bind(this)).$promise;
     };

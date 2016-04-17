@@ -13,6 +13,7 @@
             if (ctrl.registerAccount.password !== ctrl.confirmPassword) {
                 ctrl.doNotMatch = 'ERROR';
             } else {
+                ctrl.registerAccount.langKey = 'en';
                 ctrl.doNotMatch = null;
                 ctrl.error = null;
                 ctrl.errorUserExists = null;
