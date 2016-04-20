@@ -2,6 +2,7 @@ package com.rdn;
 
 import com.rdn.pages.LoginPage;
 import com.rdn.utils.SeleniumTest;
+import com.rdn.utils.TestContextInitializer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = DtrackApplication.class)
+@SpringApplicationConfiguration(classes = DtrackApplication.class, initializers = TestContextInitializer.class)
 @SeleniumTest
 public class LoginPageTest {
 

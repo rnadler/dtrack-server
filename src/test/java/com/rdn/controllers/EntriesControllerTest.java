@@ -5,6 +5,7 @@ import com.rdn.model.Entry;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.boot.test.WebIntegrationTest;
@@ -21,11 +22,17 @@ import static org.hamcrest.core.Is.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DtrackApplication.class)
-@WebIntegrationTest("server.port=9000")
+@WebIntegrationTest("server.port=0")  // random port
 public class EntriesControllerTest {
-    private final String BASE_URL = "http://localhost:9000/api/v1/entries";
     private RestTemplate rest;
     private LocalDateTime now;
+
+    @Value("${local.server.port}")
+    int port;
+
+    private String getBaseUrl() {
+        return String.format("http://localhost:%d/api/v1/entries", port);
+    }
 
     @Before
     public void setUp() {
@@ -37,7 +44,7 @@ public class EntriesControllerTest {
     @Test
     public void shouldGetEntriesForUser() {
 
-        ResponseEntity<Entry[]> response = rest.getForEntity(BASE_URL, Entry[].class);
+        ResponseEntity<Entry[]> response = rest.getForEntity(getBaseUrl(), Entry[].class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         for (Entry entry : response.getBody()) {
             assertThat(entry.getUser(), is("user"));
@@ -46,7 +53,7 @@ public class EntriesControllerTest {
 
     private URI createEntry() {
         Entry entry = new Entry("", now, "intTest", "5.50");
-        ResponseEntity<Entry> response = rest.postForEntity(BASE_URL, entry, Entry.class);
+        ResponseEntity<Entry> response = rest.postForEntity(getBaseUrl(), entry, Entry.class);
         assertThat(response.getStatusCode(), is(HttpStatus.CREATED));
         assertThat(response.getBody().getUser(), is("user"));
         return response.getHeaders().getLocation();
@@ -74,7 +81,7 @@ public class EntriesControllerTest {
 
     @Test
     public void shouldReadEntriesByType() {
-        ResponseEntity<Entry[]> response = rest.getForEntity(BASE_URL + "/type/odd", Entry[].class);
+        ResponseEntity<Entry[]> response = rest.getForEntity(getBaseUrl() + "/type/odd", Entry[].class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
         for (Entry entry : response.getBody()) {
             assertThat(entry.getType(), is("odd"));
