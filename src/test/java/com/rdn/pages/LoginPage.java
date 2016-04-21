@@ -34,6 +34,10 @@ public class LoginPage {
     @FindBy(id = "version")
     private WebElement version;
 
+    @Getter
+    @FindBy(id = "register")
+    private WebElement register;
+
     private final WebDriver driver;
 
     public LoginPage(WebDriver driver) {
