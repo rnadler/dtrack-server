@@ -8,11 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -71,4 +73,45 @@ public class RegisterPageTest {
         assertThat(registerPage.getSuccessMessage().getText(), is("Registration saved! Go to the Login page to sign in."));
     }
 
+    @Test
+    public void testDirtyUsername() {
+        WebElement login = registerPage.getLogin();
+        login.sendKeys("xx");
+        login.clear();
+        assertThat(registerPage.getUsernameDirtyMessage().getText(), is("Your username is required."));
+        login.sendKeys("xx-yy");
+        assertThat(registerPage.getUsernameDirtyMessage().getText(), is("Your username can only contain lower-case letters and digits."));
+    }
+
+    @Test
+    public void testDirtyEmail() {
+        WebElement email = registerPage.getEmail();
+        email.sendKeys("xx");
+        email.clear();
+        assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is required."));
+        email.sendKeys("xxyy");
+        assertThat(registerPage.getEmailDirtyMessage().getText(), containsString("Your e-mail is required to be at least 5 characters."));
+        email.sendKeys("zz");
+        assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is invalid."));
+    }
+
+    @Test
+    public void testDirtyPassword() {
+        WebElement password = registerPage.getPassword();
+        password.sendKeys("xx");
+        password.clear();
+        assertThat(registerPage.getPasswordDirtyMessage().getText(), is("Your password is required."));
+        password.sendKeys("xxyy");
+        assertThat(registerPage.getPasswordDirtyMessage().getText(), is("Your password is required to be at least 5 characters."));
+    }
+
+    @Test
+    public void testDirtyConfirmPassword() {
+        WebElement confirmPassword = registerPage.getConfirmPassword();
+        confirmPassword.sendKeys("xx");
+        confirmPassword.clear();
+        assertThat(registerPage.getConfirmPasswordDirtyMessage().getText(), is("Your confirmation password is required."));
+        confirmPassword.sendKeys("xxyy");
+        assertThat(registerPage.getConfirmPasswordDirtyMessage().getText(), is("Your confirmation password is required to be at least 5 characters."));
+    }
 }

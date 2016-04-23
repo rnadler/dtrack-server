@@ -48,6 +48,21 @@ public class RegisterPage {
     @FindBy(id = "registerButton")
     private WebElement registerButton;
 
+    @Getter
+    @FindBy(id = "usernameDirtyMessage")
+    private WebElement usernameDirtyMessage;
+    @Getter
+    @FindBy(id = "emailDirtyMessage")
+    private WebElement emailDirtyMessage;
+
+    @Getter
+    @FindBy(id = "passwordDirtyMessage")
+    private WebElement passwordDirtyMessage;
+
+    @Getter
+    @FindBy(id = "confirmPasswordDirtyMessage")
+    private WebElement confirmPasswordDirtyMessage;
+
     private final WebDriver driver;
 
     public RegisterPage(WebDriver driver) {
