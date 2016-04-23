@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = DtrackApplication.class)
 @WebAppConfiguration
-@IntegrationTest
+@IntegrationTest("server.port=0")
 public class AccountControllerTest {
 
     @Autowired
@@ -47,19 +48,16 @@ public class AccountControllerTest {
 
     @Mock
     private UserService mockUserService;
+
+    @Value("${local.server.port}")
+    int port;
     
     private MockMvc restUserMockMvc;
 
     private MockMvc restMvc;
 
-    private boolean userRepoCleared;
-
     @Before
     public void setup() {
-        if (!userRepoCleared) {
-            userRepository.deleteAll();
-            userRepoCleared = true;
-        }
         MockitoAnnotations.initMocks(this);
 
         AccountController accountController = new AccountController();
