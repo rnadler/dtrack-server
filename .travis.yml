@@ -6,7 +6,7 @@ services:
   - mongodb
 before_script:
   - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - "Xvfb -ac :99 -screen 0 1280x1024x16 &"
   - sleep 3 # give xvfb some time to start
 addons:
     firefox: "45.0.2"
