@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,10 +39,12 @@ public class MainPageTest {
     public void setUp() throws Exception {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         mainPage = PageFactory.initElements(driver, MainPage.class);
-        webDriverWait = new WebDriverWait(driver, 50);
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginPage.getUserName()));
+        webDriverWait = new WebDriverWait(driver, 5);
+        waitForWebElementToBeVisible(loginPage.getUserName());
     }
-
+    private void waitForWebElementToBeVisible(WebElement webElement) {
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
+    }
     @Test
     public void testLogoutMessage() {
         LoginPageTest.loginSucessfully(loginPage);
@@ -54,7 +57,7 @@ public class MainPageTest {
         LoginPageTest.loginSucessfully(loginPage);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
         mainPage.getSendNotificationButton().click();
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(mainPage.getNotificationMessage())));
+        waitForWebElementToBeVisible(mainPage.getNotificationMessage());
         assertThat(mainPage.getNotificationMessage().getText().startsWith("Notification received"), is(true));
     }
 }

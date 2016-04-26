@@ -39,17 +39,18 @@ public class RegisterPageTest {
         registerPage = PageFactory.initElements(driver, RegisterPage.class);
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         WebElement register = loginPage.getRegister();
-        webDriverWait = new WebDriverWait(driver, 50);
+        webDriverWait = new WebDriverWait(driver, 5);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(register));
         register.click();
         waitForWebElementToBeVisible(registerPage.getLogin());
     }
-    private void setLoginAndEmail(String login, String email) throws InterruptedException {
+    private void setLoginAndEmail(String login, String email, WebElement webElement) throws InterruptedException {
         registerPage.getLogin().sendKeys(login);
         registerPage.getEmail().sendKeys(email);
         registerPage.getPassword().sendKeys("A1b2c3!");
         registerPage.getConfirmPassword().sendKeys("A1b2c3!");
         registerPage.getRegisterButton().click();
+        waitForWebElementToBeVisible(webElement);
     }
     private void waitForWebElementToBeVisible(WebElement webElement) {
         webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
@@ -66,22 +67,19 @@ public class RegisterPageTest {
 
     @Test
     public void testUserExistsMessage() throws InterruptedException {
-        setLoginAndEmail("user", "user@localhost");
-        waitForWebElementToBeVisible(registerPage.getLoginExistsMessage());
+        setLoginAndEmail("user", "user@localhost", registerPage.getLoginExistsMessage());
         assertThat(registerPage.getLoginExistsMessage().getText(), is("Login name already registered! Please choose another one."));
     }
 
     @Test
     public void testEmailExistsMessage() throws InterruptedException {
-        setLoginAndEmail("user2", "user@localhost");
-        waitForWebElementToBeVisible(registerPage.getEmailExistsMessage());
+        setLoginAndEmail("user2", "user@localhost", registerPage.getEmailExistsMessage());
         assertThat(registerPage.getEmailExistsMessage().getText(), is("E-mail is already in use! Please choose another one."));
     }
 
     @Test
     public void testSuccessMessage() throws InterruptedException {
-        setLoginAndEmail("user3", "user3@localhost");
-        waitForWebElementToBeVisible(registerPage.getSuccessMessage());
+        setLoginAndEmail("user3", "user3@localhost", registerPage.getSuccessMessage());
         assertThat(registerPage.getSuccessMessage().getText(), is("Registration saved! Go to the Login page to sign in."));
     }
 

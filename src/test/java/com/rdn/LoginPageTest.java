@@ -31,7 +31,7 @@ public class LoginPageTest {
     @Before
     public void setUp() throws Exception {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
-        new WebDriverWait(driver, 50).until(ExpectedConditions.elementToBeClickable(loginPage.getUserName()));
+        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(loginPage.getUserName()));
     }
 
     @Test
