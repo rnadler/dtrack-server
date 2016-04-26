@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Collections;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,16 +32,17 @@ public class RegisterPageTest {
     private WebDriver driver;
 
     private RegisterPage registerPage;
-    private LoginPage loginPage;
+    private WebDriverWait webDriverWait;
 
     @Before
     public void setUp() throws Exception {
         registerPage = PageFactory.initElements(driver, RegisterPage.class);
-        loginPage = PageFactory.initElements(driver, LoginPage.class);
+        LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         WebElement register = loginPage.getRegister();
-        new WebDriverWait(driver, 50).until(ExpectedConditions.elementToBeClickable(register));
+        webDriverWait = new WebDriverWait(driver, 50);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(register));
         register.click();
-        Thread.sleep(1000);
+        waitForWebElementToBeVisible(registerPage.getLogin());
     }
     private void setLoginAndEmail(String login, String email) throws InterruptedException {
         registerPage.getLogin().sendKeys(login);
@@ -47,7 +50,9 @@ public class RegisterPageTest {
         registerPage.getPassword().sendKeys("A1b2c3!");
         registerPage.getConfirmPassword().sendKeys("A1b2c3!");
         registerPage.getRegisterButton().click();
-        Thread.sleep(1000);
+    }
+    private void waitForWebElementToBeVisible(WebElement webElement) {
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
     }
 
     @Test
@@ -62,18 +67,21 @@ public class RegisterPageTest {
     @Test
     public void testUserExistsMessage() throws InterruptedException {
         setLoginAndEmail("user", "user@localhost");
+        waitForWebElementToBeVisible(registerPage.getLoginExistsMessage());
         assertThat(registerPage.getLoginExistsMessage().getText(), is("Login name already registered! Please choose another one."));
     }
 
     @Test
     public void testEmailExistsMessage() throws InterruptedException {
         setLoginAndEmail("user2", "user@localhost");
+        waitForWebElementToBeVisible(registerPage.getEmailExistsMessage());
         assertThat(registerPage.getEmailExistsMessage().getText(), is("E-mail is already in use! Please choose another one."));
     }
 
     @Test
     public void testSuccessMessage() throws InterruptedException {
         setLoginAndEmail("user3", "user3@localhost");
+        waitForWebElementToBeVisible(registerPage.getSuccessMessage());
         assertThat(registerPage.getSuccessMessage().getText(), is("Registration saved! Go to the Login page to sign in."));
     }
 

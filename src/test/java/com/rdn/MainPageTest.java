@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Collections;
+
+import static java.util.Arrays.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -29,12 +32,14 @@ public class MainPageTest {
 
     private LoginPage loginPage;
     private MainPage mainPage;
+    private WebDriverWait webDriverWait;
 
     @Before
     public void setUp() throws Exception {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         mainPage = PageFactory.initElements(driver, MainPage.class);
-        new WebDriverWait(driver, 50).until(ExpectedConditions.elementToBeClickable(loginPage.getUserName()));
+        webDriverWait = new WebDriverWait(driver, 50);
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(loginPage.getUserName()));
     }
 
     @Test
@@ -47,9 +52,9 @@ public class MainPageTest {
     @Test
     public void testNotification() throws InterruptedException {
         LoginPageTest.loginSucessfully(loginPage);
-        Thread.sleep(1000); // time for websocket/STOMP subscription setup
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
         mainPage.getSendNotificationButton().click();
-        Thread.sleep(1000); // time for server notification and UI update
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(mainPage.getNotificationMessage())));
         assertThat(mainPage.getNotificationMessage().getText().startsWith("Notification received"), is(true));
     }
 }
