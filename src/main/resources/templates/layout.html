@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styles/main.css" />
     <!-- endbuild -->
 </head>
-<body ng-app="dtrackApp" class="ng-cloak">
+<body class="ng-cloak">
   <div class="container">
       <!--<div class="header">-->
           <!--<h3 class="text-info">Data Tracker</h3>-->
@@ -86,6 +86,16 @@
   <script src="scripts/app/components/register/register.js"></script>
   <script src="scripts/app/directives/passwordDirective.js"></script>
   <script src="scripts/app/directives/formDirective.js"></script>
+  <!-- Angular 2-->
+  <script src="node_modules/core-js/client/shim.min.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <!-- 2. Configure SystemJS -->
+  <script src="scripts/app/systemjs.config.js"></script>
+  <script>
+      System.import('app').catch(function(err){ console.error(err); });
+  </script>
   <!-- endbuild -->
 
 </body>

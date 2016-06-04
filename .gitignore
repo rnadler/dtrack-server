@@ -21,8 +21,10 @@ buildNumber.properties
 
 /node/
 /node_modules/
+/src/main/resources/static/node_modules/
 /src/main/resources/static/scripts/app/app.constants.js
 /src/main/resources/static/bower_components/
 *.log
 maven/
+.tmp/
 

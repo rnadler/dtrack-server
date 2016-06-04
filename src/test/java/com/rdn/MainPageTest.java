@@ -56,6 +56,7 @@ public class MainPageTest {
     public void testNotification() throws InterruptedException {
         LoginPageTest.loginSucessfully(loginPage);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
+        Thread.sleep(1000);  // Angular2 loads components asynchronously
         mainPage.getSendNotificationButton().click();
         waitForWebElementToBeVisible(mainPage.getNotificationMessage());
         assertThat(mainPage.getNotificationMessage().getText().startsWith("Notification received"), is(true));
