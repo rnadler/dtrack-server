@@ -29,8 +29,8 @@
                   <a class="navbar-brand" th:href="@{/}"><span>Data Tracker</span></a>
               </div>
               <div th:if="${#httpServletRequest.remoteUser != null}">
-                  <div class="collapse navbar-collapse" id="navbar-ex-collapse" ng-controller="navBarCtrl"
-                       th:attr="ng-init='init(\''+${#httpServletRequest.remoteUser}+'\');'">
+                  <nav-bar th:attr="user=''+${#httpServletRequest.remoteUser}+''"></nav-bar>
+                  <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                       <ul class="nav navbar-nav navbar-right">
                           <li th:classappend="${#httpServletRequest.getRequestURI() == '/main' || #httpServletRequest.getRequestURI() == '/' ? 'active':''}">
                               <a th:href="@{/main}" th:inline="text"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
@@ -78,12 +78,12 @@
   <script src="scripts/app/app.js"></script>
   <script src="scripts/app/app.constants.js"></script>
   <script src="scripts/app/controllers/data.js"></script>
-  <script src="scripts/app/controllers/navBar.js"></script>
   <script src="scripts/app/controllers/update.js"></script>
   <script src="scripts/app/components/appFooter/appFooter.js"></script>
   <script src="scripts/app/components/logAlert/logAlert.js"></script>
   <script src="scripts/app/components/notificationAlert/notificationAlert.js"></script>
   <script src="scripts/app/components/register/register.js"></script>
+  <script src="scripts/app/components/navBar/navBar.js"></script>
   <script src="scripts/app/directives/passwordDirective.js"></script>
   <script src="scripts/app/directives/formDirective.js"></script>
   <!-- Angular 2-->
