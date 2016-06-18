@@ -11,6 +11,47 @@
     <!-- build:css assets/styles/main.css -->
     <link rel="stylesheet" href="styles/main.css" />
     <!-- endbuild -->
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+    <script src="bower_components/ng-stomp/dist/ng-stomp.standalone.min.js"></script>
+    <!-- Angular 2-->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <!-- Configure SystemJS -->
+    <script src="scripts/app/systemjs.config.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
+    <!--<script src="scripts/app/app.js"></script>-->
+    <script src="scripts/vendors/highcharts.js"></script>
+    <script src="scripts/app/util/utils.js"></script>
+    <script src="scripts/app/services/userService.js"></script>
+    <script src="scripts/app/services/authService.js"></script>
+    <script src="scripts/app/services/registerService.js"></script>
+    <script src="scripts/app/app.js"></script>
+    <script src="scripts/app/app.constants.js"></script>
+    <script src="scripts/app/controllers/data.js"></script>
+    <script src="scripts/app/controllers/update.js"></script>
+    <script src="scripts/app/components/appFooter/appFooter.js"></script>
+    <script src="scripts/app/components/logAlert/logAlert.js"></script>
+    <script src="scripts/app/components/notificationAlert/notificationAlert.js"></script>
+    <script src="scripts/app/components/register/register.js"></script>
+    <script src="scripts/app/components/navBar/navBar.js"></script>
+    <script src="scripts/app/directives/passwordDirective.js"></script>
+    <script src="scripts/app/directives/formDirective.js"></script>
+    <!-- Bootstrap the Angular App -->
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
+    </script>
+    <!-- endbuild -->
 </head>
 <body class="ng-cloak">
   <div class="container">
@@ -56,47 +97,6 @@
     <div class="well" th:include="this :: content"></div>
       <app-footer></app-footer>
   </div>
-
-  <!-- build:js scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.js"></script>
-  <script src="bower_components/angular-resource/angular-resource.js"></script>
-  <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
-  <script src="bower_components/ng-stomp/dist/ng-stomp.standalone.min.js"></script>
-  <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:js({.tmp,src/main/webapp}) scripts/app.js -->
-  <!--<script src="scripts/app/app.js"></script>-->
-  <script src="scripts/vendors/highcharts.js"></script>
-  <script src="scripts/app/util/utils.js"></script>
-  <script src="scripts/app/services/userService.js"></script>
-  <script src="scripts/app/services/authService.js"></script>
-  <script src="scripts/app/services/registerService.js"></script>
-  <script src="scripts/app/app.js"></script>
-  <script src="scripts/app/app.constants.js"></script>
-  <script src="scripts/app/controllers/data.js"></script>
-  <script src="scripts/app/controllers/update.js"></script>
-  <script src="scripts/app/components/appFooter/appFooter.js"></script>
-  <script src="scripts/app/components/logAlert/logAlert.js"></script>
-  <script src="scripts/app/components/notificationAlert/notificationAlert.js"></script>
-  <script src="scripts/app/components/register/register.js"></script>
-  <script src="scripts/app/components/navBar/navBar.js"></script>
-  <script src="scripts/app/directives/passwordDirective.js"></script>
-  <script src="scripts/app/directives/formDirective.js"></script>
-  <!-- Angular 2-->
-  <script src="node_modules/core-js/client/shim.min.js"></script>
-  <script src="node_modules/zone.js/dist/zone.js"></script>
-  <script src="node_modules/reflect-metadata/Reflect.js"></script>
-  <script src="node_modules/systemjs/dist/system.src.js"></script>
-  <!-- 2. Configure SystemJS -->
-  <script src="scripts/app/systemjs.config.js"></script>
-  <script>
-      System.import('app').catch(function(err){ console.error(err); });
-  </script>
-  <!-- endbuild -->
 
 </body>
 </html>
