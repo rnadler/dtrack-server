@@ -10,7 +10,6 @@ import { Component, Inject } from '@angular/core';
 export class UpdateComponent {
 
     constructor(@Inject('User') public user, @Inject('$stomp') public stomp) {
-        console.log("UpdateComponent constructor user=" + user + " stomp=" + stomp);
     }
     sendUpdate() {
         if (this.user.isLoggedIn()) {
