@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 @Component({
     selector: 'update-component',
     template: `
-    <button type="button" class="btn btn-secondary" (click)="sendUpdate()" id="sendNotification2">Send Update2</button>
+    <button type="button" class="btn btn-secondary" (click)="sendUpdate()" id="sendNotification">Send Update</button>
     `
 })
 

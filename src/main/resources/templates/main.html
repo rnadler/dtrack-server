@@ -6,10 +6,6 @@
 <div th:fragment="content">
     <h3 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h3>
     <!-- Debug STOMP message-->
-    <div ng-controller="updateCtrl">
-        <button type="button" class="btn btn-secondary" ng-click="sendUpdate()" id="sendNotification">Send Update</button>
-    </div>
-    <br/>
     <update-component>Loading...</update-component>
     <br/>
     <!---->
