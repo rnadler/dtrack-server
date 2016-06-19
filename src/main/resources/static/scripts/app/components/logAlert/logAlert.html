@@ -1,4 +1,4 @@
 <div>
-    <uib-alert type="danger" ng-hide="$ctrl.errorAlert.enabled === false" id="invalidMessage">Invalid username and password.</uib-alert>
-    <uib-alert type="success" ng-hide="$ctrl.logoutAlert.enabled === false" id="logoutMessage">You have been logged out.</uib-alert>
+    <alert [type]="errorAlert.type"  [hidden]="!errorAlert.enabled" id="invalidMessage">{{errorAlert.msg}}</alert>
+    <alert [type]="logoutAlert.type" [hidden]="!logoutAlert.enabled" id="logoutMessage">{{logoutAlert.msg}}</alert>
 </div>
