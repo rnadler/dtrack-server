@@ -3,48 +3,48 @@
         <div class="col-md-8 col-md-offset-2">
             <h1>Registration</h1>
 
-            <div class="alert alert-success" ng-show="$ctrl.success" id="successMessage">
+            <div class="alert alert-success" [hidden]="!success" id="successMessage">
                 <strong>Registration saved!</strong> Go to the <a href="/login">Login page</a> to sign in.
             </div>
 
-            <div class="alert alert-danger" ng-show="$ctrl.error" id="failedMessage">
+            <div class="alert alert-danger" [hidden]="!error" id="failedMessage">
                 <strong>Registration failed!</strong> Please try again later.
             </div>
 
-            <div class="alert alert-danger" ng-show="$ctrl.errorUserExists" id="loginExistsMessage">
+            <div class="alert alert-danger" [hidden]="!errorUserExists" id="loginExistsMessage">
                 <strong>Login name already registered!</strong> Please choose another one.
             </div>
 
-            <div class="alert alert-danger" ng-show="$ctrl.errorEmailExists" id="emailExistsMessage">
+            <div class="alert alert-danger" [hidden]="!errorEmailExists" id="emailExistsMessage">
                 <strong>E-mail is already in use!</strong> Please choose another one.
             </div>
 
-            <div class="alert alert-danger" ng-show="$ctrl.doNotMatch" id="passwordMismatchMessage">
+            <div class="alert alert-danger" [hidden]="!doNotMatch" id="passwordMismatchMessage">
                 The password and its confirmation do not match!
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <form ng-show="!$ctrl.success" name="form" role="form" novalidate ng-submit="$ctrl.register()" show-validation>
+            <form [hidden]="success" name="form" role="form" #registerForm="ngForm" novalidate (ng-submit)="register()" show-validation>
 
                 <div class="form-group">
                     <label class="control-label" for="login" >Username</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="Your username"
-                           ng-model="$ctrl.registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[a-z0-9]*$/" required>
-                    <div ng-show="form.login.$dirty && form.login.$invalid" id="usernameDirtyMessage">
+                    <input type="text" class="form-control" id="login" name="login" placeholder="Your username" #login ngModel
+                           [(ngModel)]="registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[a-z0-9]*$/" required>
+                    <div [hidden]="login.valid || login.pristine" id="usernameDirtyMessage">
                         <p class="help-block"
-                               ng-show="form.login.$error.required" >
+                                [hidden]="!login.errors.required" >
                             Your username is required.
                         </p>
                         <p class="help-block"
-                               ng-show="form.login.$error.minlength" >
+                               [hidden]="!login.errors.minlength" >
                             Your username is required to be at least 1 character.
                         </p>
                         <p class="help-block"
-                               ng-show="form.login.$error.maxlength" >
+                               [hidden]="!login.errors.maxlength" >
                             Your username cannot be longer than 50 characters.
                         </p>
                         <p class="help-block"
-                               ng-show="form.login.$error.pattern" >
+                               [hidden]="!login.errors.pattern" >
                             Your username can only contain lower-case letters and digits.
                     </p>
                     </div>
@@ -52,22 +52,22 @@
                 <div class="form-group">
                     <label class="control-label" for="email">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Your e-mail"
-                           ng-model="$ctrl.registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
-                    <div ng-show="form.email.$dirty && form.email.$invalid" id="emailDirtyMessage">
+                           [(ngModel)]="registerAccount.email" ng-minlength=5 ng-maxlength=100 required>
+                    <div [hidden]="registerForm.email.valid || registerForm.email.pristine" id="emailDirtyMessage">
                         <p class="help-block"
-                               ng-show="form.email.$error.required" >
+                               [hidden]="!registerForm.email.$error.required" >
                             Your e-mail is required.
                         </p>
                         <p class="help-block"
-                               ng-show="form.email.$error.email" >
+                               [hidden]="!registerForm.email.$error.email" >
                             Your e-mail is invalid.
                         </p>
                         <p class="help-block"
-                               ng-show="form.email.$error.minlength" >
+                               [hidden]="!registerForm.email.$error.minlength" >
                             Your e-mail is required to be at least 5 characters.
                         </p>
                         <p class="help-block"
-                               ng-show="form.email.$error.maxlength" >
+                               [hidden]="!registerForm.email.$error.maxlength" >
                             Your e-mail cannot be longer than 100 characters.
                         </p>
                     </div>
@@ -75,44 +75,44 @@
                 <div class="form-group">
                     <label class="control-label" for="password" >New password</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="New password"
-                           ng-model="$ctrl.registerAccount.password" ng-minlength=5 ng-maxlength=50 required>
-                    <div ng-show="form.password.$dirty && form.password.$invalid" id="passwordDirtyMessage">
+                           [(ngModel)]="registerAccount.password" ng-minlength=5 ng-maxlength=50 required>
+                    <div [hidden]="registerForm.password.valid || registerForm.password.pristine" id="passwordDirtyMessage">
                         <p class="help-block"
-                               ng-show="form.password.$error.required" >
+                               [hidden]="!registerForm.password.$error.required" >
                             Your password is required.
                         </p>
                         <p class="help-block"
-                               ng-show="form.password.$error.minlength" >
+                               [hidden]="!registerForm.password.$error.minlength" >
                             Your password is required to be at least 5 characters.
                         </p>
                         <p class="help-block"
-                               ng-show="form.password.$error.maxlength" >
+                               [hidden]="!registerForm.password.$error.maxlength" >
                             Your password cannot be longer than 50 characters.
                         </p>
                     </div>
-                    <password-strength-bar password-to-check="$ctrl.registerAccount.password"></password-strength-bar>
+                    <password-strength-bar password-to-check="registerAccount.password"></password-strength-bar>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="confirmPassword" >New password confirmation</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"
-                           ng-model="$ctrl.confirmPassword" ng-minlength=5 ng-maxlength=50 required>
-                    <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid" id="confirmPasswordDirtyMessage">
+                           [(ngModel)]="confirmPassword" ng-minlength=5 ng-maxlength=50 required>
+                    <div [hidden]="registerForm.confirmPassword.valid || registerForm.confirmPassword.pristine" id="confirmPasswordDirtyMessage">
                         <p class="help-block"
-                               ng-show="form.confirmPassword.$error.required" >
+                               [hidden]="!registerForm.confirmPassword.$error.required" >
                             Your confirmation password is required.
                         </p>
                         <p class="help-block"
-                               ng-show="form.confirmPassword.$error.minlength" >
+                               [hidden]="!registerForm.confirmPassword.$error.minlength" >
                             Your confirmation password is required to be at least 5 characters.
                         </p>
                         <p class="help-block"
-                               ng-show="form.confirmPassword.$error.maxlength" >
+                               [hidden]="!registerForm.confirmPassword.$error.maxlength" >
                             Your confirmation password cannot be longer than 50 characters.
                         </p>
                     </div>
                 </div>
 
-                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" id="registerButton">Register</button>
+                <button type="submit" [disabled]="!registerForm.form.valid" class="btn btn-primary" id="registerButton">Register</button>
             </form>
         </div>
     </div>

@@ -40,6 +40,9 @@
     var setPackageConfig = System.packageWithIndex ? packIndex : packUmd;
     // Add package entries for angular packages
     ngPackageNames.forEach(setPackageConfig);
+
+    packages['@angular/forms'] = { main: 'index.js', defaultExtension: 'js' };
+
     var config = {
         map: map,
         packages: packages

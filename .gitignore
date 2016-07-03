@@ -7,7 +7,7 @@
 atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
-/screenshots
+screenshots/
 crashlytics-build.properties
 target/
 pom.xml.tag
@@ -20,11 +20,13 @@ buildNumber.properties
 .mvn/timing.properties
 
 /node/
-/node_modules/
-/src/main/resources/static/node_modules/
-/src/main/resources/static/scripts/app/app.constants.js
-/src/main/resources/static/bower_components/
+node_modules/
+src/main/resources/static/node_modules/
+src/main/resources/static/scripts/app/app.constants.js
+src/main/resources/static/bower_components/
 *.log
 maven/
 .tmp/
+*.map
+typings/
 
