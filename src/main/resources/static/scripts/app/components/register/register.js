@@ -51,8 +51,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 var core_1 = require('@angular/core');
-var common_1 = require('@angular/common');
+//import { NgForm }    from '@angular/common';
+//import { NgForm, FORM_DIRECTIVES }    from '@angular/common';
 //import {formDirectives} from '@angular/forms';
+var forms_1 = require('@angular/forms');
 var Register = (function () {
     function Register(timeout, auth) {
         this.timeout = timeout;
@@ -67,6 +69,10 @@ var Register = (function () {
             password: null,
             langKey: 'en'
         };
+        this.loginCtrl = new forms_1.FormControl('');
+        this.registerForm = new forms_1.FormGroup({
+            'login': this.loginCtrl
+        });
         //this.timeout(function (){window.angular.element('[[(ngModel)]="registerAccount.login"]').focus();});
     }
     Register.prototype.register = function () {
@@ -99,7 +105,8 @@ var Register = (function () {
         core_1.Component({
             selector: 'register',
             templateUrl: 'scripts/app/components/register/register.html',
-            directives: [common_1.FORM_DIRECTIVES]
+            //    directives: [FORM_DIRECTIVES]
+            directives: [forms_1.REACTIVE_FORM_DIRECTIVES]
         }),
         __param(0, core_1.Inject('$timeout')),
         __param(1, core_1.Inject('Auth'))

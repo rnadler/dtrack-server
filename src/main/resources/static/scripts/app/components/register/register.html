@@ -24,27 +24,27 @@
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <form [hidden]="success" name="form" role="form" #registerForm="ngForm" novalidate (ng-submit)="register()" show-validation>
+            <form [hidden]="success" name="form" role="form" [formGroup]="registerForm" novalidate (ng-submit)="register()" show-validation>
 
                 <div class="form-group">
                     <label class="control-label" for="login" >Username</label>
-                    <input type="text" class="form-control" id="login" name="login" placeholder="Your username" #login ngModel
+                    <input type="text" class="form-control" id="login" name="login" placeholder="Your username" formControlName="login"
                            [(ngModel)]="registerAccount.login" ng-minlength=1 ng-maxlength=50 ng-pattern="/^[a-z0-9]*$/" required>
-                    <div [hidden]="login.valid || login.pristine" id="usernameDirtyMessage">
+                    <div [hidden]="registerForm.controls.login.valid || registerForm.controls.login.pristine" id="usernameDirtyMessage">
                         <p class="help-block"
-                                [hidden]="!login.errors.required" >
+                                [hidden]="!registerForm.controls.login.required" >
                             Your username is required.
                         </p>
                         <p class="help-block"
-                               [hidden]="!login.errors.minlength" >
+                               [hidden]="!registerForm.controls.login.errors.minlength" >
                             Your username is required to be at least 1 character.
                         </p>
                         <p class="help-block"
-                               [hidden]="!login.errors.maxlength" >
+                               [hidden]="!registerForm.controls.login.errors.maxlength" >
                             Your username cannot be longer than 50 characters.
                         </p>
                         <p class="help-block"
-                               [hidden]="!login.errors.pattern" >
+                               [hidden]="!registerForm.controls.login.errors.pattern" >
                             Your username can only contain lower-case letters and digits.
                     </p>
                     </div>
