@@ -101,7 +101,7 @@ public class RegisterPageTest {
         assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is required."));
         email.sendKeys("xxyy");
         assertThat(registerPage.getEmailDirtyMessage().getText(), containsString("Your e-mail is required to be at least 5 characters."));
-        email.sendKeys("zz");
+        email.sendKeys("xxxyzz");
         assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is invalid."));
     }
 
