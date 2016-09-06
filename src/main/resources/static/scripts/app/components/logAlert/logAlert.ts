@@ -1,9 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
+import {Component, Inject, OnInit} from '@angular/core';
 
 @Component({
     selector: 'log-alert',
-    directives: [AlertComponent],
     templateUrl: 'scripts/app/components/logAlert/logAlert.html'
 })
 
@@ -11,6 +9,7 @@ export class LogAlert implements OnInit {
 
     public logoutAlert = {enabled: false, type: "success", msg: 'You have been logged out.'};
     public errorAlert = {enabled: false, type: "danger", msg: 'Invalid username and password.'};
+    private url;
 
     constructor(@Inject('$timeout') public timeout, @Inject('$location') public location,
                 @Inject('User') public user) {
