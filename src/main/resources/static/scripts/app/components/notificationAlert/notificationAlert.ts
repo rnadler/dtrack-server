@@ -1,9 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
     selector: 'notification-alert',
-    directives: [AlertComponent],
     templateUrl: 'scripts/app/components/notificationAlert/notificationAlert.html'
 })
 

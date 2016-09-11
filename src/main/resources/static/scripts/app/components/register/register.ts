@@ -42,16 +42,11 @@
 // })(window.angular);
 
 import { Component, Inject } from '@angular/core';
-//import { NgForm }    from '@angular/common';
-//import { NgForm, FORM_DIRECTIVES }    from '@angular/common';
-//import {formDirectives} from '@angular/forms';
-import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl} from '@angular/forms';
+
 
 @Component({
     selector: 'register',
     templateUrl: 'scripts/app/components/register/register.html',
-//    directives: [FORM_DIRECTIVES]
-    directives: [REACTIVE_FORM_DIRECTIVES]
 })
 
 export class Register {
@@ -66,12 +61,8 @@ export class Register {
         password: null,
         langKey: 'en'
     };
-    registerForm: FormGroup;
-    loginCtrl = new FormControl('');
+
     constructor(@Inject('$timeout') private timeout, @Inject('Auth') private auth) {
-        this.registerForm = new FormGroup({
-            'login' : this.loginCtrl
-        });
         //this.timeout(function (){window.angular.element('[[(ngModel)]="registerAccount.login"]').focus();});
     }
     
@@ -98,6 +89,11 @@ export class Register {
             });
         }
     }
+    // TODO: Remove this when we're done
+    diagnostic() {
+        return JSON.stringify(this.registerAccount);
+    }
+
 }
 
 
