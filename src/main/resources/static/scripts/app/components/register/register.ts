@@ -89,11 +89,6 @@ export class Register {
             });
         }
     }
-    // TODO: Remove this when we're done
-    diagnostic() {
-        return JSON.stringify(this.registerAccount);
-    }
-
 }
 
 
