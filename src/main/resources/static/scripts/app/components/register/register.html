@@ -32,7 +32,8 @@
                     <label class="control-label" for="login" >Username</label>
                     <input type="text" class="form-control" id="login" name="login" placeholder="Your username"
                            [(ngModel)]="registerAccount.login" #login="ngModel"
-                           minlength="2" maxlength="50" pattern="/^[a-z0-9]*$/" required>
+                           minlength="2" maxlength="50" required>
+                           <!--pattern="/^[a-z0-9]*$/" -->
                     <div *ngIf="login.errors && (login.dirty || login.touched)" id="usernameDirtyMessage">
                         <p class="alert alert-danger" *ngIf="login.errors.required">
                             Your username is required.
@@ -91,28 +92,28 @@
                             Your password cannot be longer than 50 characters.
                         </p>
                     </div>
-                    <!--<password-strength-bar password-to-check="registerAccount.password"></password-strength-bar>-->
+                    <password-strength-bar password-to-check="registerAccount.password"></password-strength-bar>
                 </div>
-                <!--<div class="form-group">-->
-                    <!--<label class="control-label" for="confirmPassword" >New password confirmation</label>-->
-                    <!--<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"-->
-                           <!--[(ngModel)]="confirmPassword" #confirmPassword="ngModel"-->
-                           <!--minlength="5" maxlength="50" required>-->
-                    <!--<div *ngIf="confirmPassword.errors && (confirmPassword.dirty || confirmPassword.touched)" id="confirmPasswordDirtyMessage">-->
-                        <!--<p class="alert alert-danger"-->
-                               <!--[hidden]="!confirmPassword.errors.required" >-->
-                            <!--Your confirmation password is required.-->
-                        <!--</p>-->
-                        <!--<p class="alert alert-danger"-->
-                               <!--[hidden]="!confirmPassword.errors.minlength" >-->
-                            <!--Your confirmation password is required to be at least 5 characters.-->
-                        <!--</p>-->
-                        <!--<p class="alert alert-danger"-->
-                               <!--[hidden]="!confirmPassword.errors.maxlength" >-->
-                            <!--Your confirmation password cannot be longer than 50 characters.-->
-                        <!--</p>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="form-group">
+                    <label class="control-label" for="confirmPassword" >New password confirmation</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm the new password"
+                           [(ngModel)]="registerAccount.confirmPassword" #confirmPassword="ngModel"
+                           minlength="5" maxlength="50" required>
+                    <div *ngIf="confirmPassword.errors && (confirmPassword.dirty || confirmPassword.touched)" id="confirmPasswordDirtyMessage">
+                        <p class="alert alert-danger"
+                               [hidden]="!confirmPassword.errors.required" >
+                            Your confirmation password is required.
+                        </p>
+                        <p class="alert alert-danger"
+                               [hidden]="!confirmPassword.errors.minlength" >
+                            Your confirmation password is required to be at least 5 characters.
+                        </p>
+                        <p class="alert alert-danger"
+                               [hidden]="!confirmPassword.errors.maxlength" >
+                            Your confirmation password cannot be longer than 50 characters.
+                        </p>
+                    </div>
+                </div>
 
                 <button type="submit" [disabled]="!registerForm.form.valid" class="btn btn-primary" id="registerButton">Register</button>
             </form>

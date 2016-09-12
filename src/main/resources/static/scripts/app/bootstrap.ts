@@ -19,7 +19,6 @@ upgradeAdapter.upgradeNg1Provider('VERSION');
 upgradeAdapter.upgradeNg1Provider('$timeout');
 upgradeAdapter.upgradeNg1Provider('$location');
 upgradeAdapter.upgradeNg1Provider('Auth');
-//upgradeAdapter.upgradeNg1Component('passwordStrengthBar');
 
 declare var angular:any;
 let app = 'dtrackApp';
@@ -41,7 +40,8 @@ module.directive('register', upgradeAdapter.downgradeNg2Component(Register));
         LogAlert,
         NotificationAlert,
         Register,
-        AlertComponent
+        AlertComponent,
+        upgradeAdapter.upgradeNg1Component('passwordStrengthBar')
     ],
     bootstrap: [
         AppFooter

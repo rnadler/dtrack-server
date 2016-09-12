@@ -56,9 +56,9 @@ export class Register {
     public doNotMatch = null;
     public errorUserExists = null;
     public errorEmailExists = null;
-    public confirmPassword = null;
     public registerAccount = {
         password: null,
+        confirmPassword: null,
         langKey: 'en'
     };
 
@@ -67,7 +67,7 @@ export class Register {
     }
     
     register() {
-        if (this.registerAccount.password !== this.confirmPassword) {
+        if (this.registerAccount.password !== this.registerAccount.confirmPassword) {
             this.doNotMatch = 'ERROR';
         } else {
             this.doNotMatch = null;
