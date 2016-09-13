@@ -8,6 +8,7 @@ import {UpgradeAdapter} from "@angular/upgrade";
 import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 import {Register} from "./components/register/register";
 import { FormsModule }   from '@angular/forms';
+// import { PasswordStrengthBar } from "./components/passwordStrengthBar/passwordStrengthBar"
 
 
 /* . . . */
@@ -28,6 +29,7 @@ module.directive('appFooter', upgradeAdapter.downgradeNg2Component(AppFooter));
 module.directive('logAlert', upgradeAdapter.downgradeNg2Component(LogAlert));
 module.directive('notificationAlert', upgradeAdapter.downgradeNg2Component(NotificationAlert));
 module.directive('register', upgradeAdapter.downgradeNg2Component(Register));
+// module.directive('passwordStrengthBar', upgradeAdapter.downgradeNg2Component(PasswordStrengthBar));
 
 @NgModule({
     imports: [
@@ -41,6 +43,7 @@ module.directive('register', upgradeAdapter.downgradeNg2Component(Register));
         NotificationAlert,
         Register,
         AlertComponent,
+        // PasswordStrengthBar
         upgradeAdapter.upgradeNg1Component('passwordStrengthBar')
     ],
     bootstrap: [
