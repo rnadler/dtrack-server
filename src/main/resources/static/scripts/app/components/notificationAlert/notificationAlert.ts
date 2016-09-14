@@ -1,4 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+declare var showAlert: any;
 
 @Component({
     selector: 'notification-alert',

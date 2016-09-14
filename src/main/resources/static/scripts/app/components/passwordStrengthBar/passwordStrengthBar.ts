@@ -1,4 +1,5 @@
 import {Component, OnChanges, SimpleChanges, Input, SimpleChange, ElementRef} from '@angular/core';
+declare var $: any;
 
 @Component({
     selector: 'password-strength-bar',

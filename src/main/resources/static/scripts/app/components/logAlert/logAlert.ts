@@ -1,4 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
+declare var showAlert: any;
 
 @Component({
     selector: 'log-alert',
