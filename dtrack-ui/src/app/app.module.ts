@@ -16,13 +16,11 @@ import { ROUTES } from './app.routes';
 import { App } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InteralStateType } from './app.service';
-import { Home } from './home';
-import { About } from './about';
-import { NoContent } from './no-content';
-import { XLarge } from './home/x-large';
 import {AppFooter} from './components/appFooter/appFooter';
 import {LogAlert} from './components/logAlert/logAlert';
 import {NotificationAlert} from './components/notificationAlert/notificationAlert'
+import {Register} from "./components/register/register";
+import {Login} from "./components/login/login"
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -43,13 +41,11 @@ type StoreType = {
   bootstrap: [ App ],
   declarations: [
     App,
-    About,
-    Home,
-    NoContent,
-    XLarge,
     AppFooter,
     LogAlert,
-    NotificationAlert
+    NotificationAlert,
+    Register,
+    Login
   ],
   imports: [ // import Angular's modules
     BrowserModule,

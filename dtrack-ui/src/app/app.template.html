@@ -1,35 +1,4 @@
 <div class="container">
-    <nav>
-      <span>
-        <a [routerLink]=" ['./'] ">
-          Index
-        </a>
-      </span>
-    |
-    <span>
-        <a [routerLink]=" ['./home'] ">
-          Home
-        </a>
-      </span>
-    |
-    <span>
-        <a [routerLink]=" ['./detail'] ">
-          Detail
-        </a>
-      </span>
-    |
-    <span>
-        <a [routerLink]=" ['./about'] ">
-          About
-        </a>
-      </span>
-    </nav>
-
-    <main>
-        <router-outlet></router-outlet>
-    </main>
-
-    <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
     <div class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -39,28 +8,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="@{/}"><span>Data Tracker</span></a>
+                <a class="navbar-brand" [routerLink]=" ['./'] "><span>Data Tracker</span></a>
             </div>
-                <!--<nav-bar th:attr="user=''+${#httpServletRequest.remoteUser}+''"></nav-bar>-->
+            <div *ngIf="appState.get('value') == 'user'">
                 <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="@{/main}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
+                            <a [routerLink]=" ['./home'] "><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
                         </li>
                         <li>
-                            <a href="@{/data}"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Data</a>
+                            <a [routerLink]=" ['./data'] "><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Data</a>
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div *ngIf="appState.get('value') != 'user'">
                 <div class="collapse navbar-collapse" id="navbar-ex-collapse2">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="@{/register}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" id="register"></span>&nbsp;Register</a>
+                            <a [routerLink]=" ['./register'] "><span class="glyphicon glyphicon-pencil" aria-hidden="true" id="register"></span>&nbsp;Register</a>
                         </li>
                     </ul>
                 </div>
+            </div>
         </div>
     </div>
     <!--<notification-alert></notification-alert>-->
+    <div class="well">
+        <main>
+            <router-outlet></router-outlet>
+        </main>
+    </div>
     <app-footer></app-footer>
 </div>
