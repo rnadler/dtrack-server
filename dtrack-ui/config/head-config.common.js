@@ -15,6 +15,7 @@
  */
 module.exports = {
   link: [
+    { rel: 'stylesheet', href: '/assets/styles/bootstrap.css' },
     { rel: 'stylesheet', href: '/assets/styles/main.css' }
   ]
 };
