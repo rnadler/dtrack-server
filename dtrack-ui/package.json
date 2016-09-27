@@ -2,7 +2,7 @@
   "name": "dtrack-ui",
   "version": "1.0.0",
   "description": "Data Tracker UI",
-  "author": "Bob Nadler <robert.nadler@gmail.com",
+  "author": "Bob Nadler <robert.nadler@gmail.com>",
   "homepage": "http://blog.rdn-consulting.com",
   "scripts": {
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile",

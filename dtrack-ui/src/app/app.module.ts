@@ -21,6 +21,7 @@ import {LogAlert} from './components/logAlert/logAlert';
 import {NotificationAlert} from './components/notificationAlert/notificationAlert'
 import {Register} from "./components/register/register";
 import {Login} from "./components/login/login"
+import { PasswordStrengthBar } from "./components/passwordStrengthBar/passwordStrengthBar"
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -45,7 +46,8 @@ type StoreType = {
     LogAlert,
     NotificationAlert,
     Register,
-    Login
+    Login,
+    PasswordStrengthBar
   ],
   imports: [ // import Angular's modules
     BrowserModule,
