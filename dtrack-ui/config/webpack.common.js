@@ -1,3 +1,7 @@
+/**
+ * @author: @AngularClass
+ */
+
 const webpack = require('webpack');
 const helpers = require('./helpers');
 
@@ -17,7 +21,7 @@ const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
  */
 const HMR = helpers.hasProcessFlag('hot');
 const METADATA = {
-  title: 'Data Tracker',
+  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -75,11 +79,8 @@ module.exports = function(options) {
        */
       extensions: ['', '.ts', '.js', '.json'],
 
-      // Make sure root is src
-      root: helpers.root('src'),
-
-      // remove other default values
-      modulesDirectories: ['node_modules'],
+      // An array of directory names to be resolved to the current directory
+      modules: [helpers.root('src'), 'node_modules'],
 
     },
 

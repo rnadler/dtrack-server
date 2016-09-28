@@ -1,4 +1,4 @@
-import {Component, OnChanges, Input, SimpleChange, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnChanges, Input, SimpleChange} from '@angular/core';
 declare var $: JQueryStatic;
 
 @Component({
@@ -7,11 +7,15 @@ declare var $: JQueryStatic;
 })
 export class PasswordStrengthBar implements OnChanges {
     @Input() passwordToCheck: string;
-    @ViewChild('strength') input: ElementRef;
+    bar0: string;
+    bar1: string;
+    bar2: string;
+    bar3: string;
+    bar4: string;
 
     private colors = ['#F00', '#F90', '#FF0', '#9F0', '#0F0'];
 
-    private measureStrength(p) {
+    private static measureStrength(p) {
         var _force = 0;
         var _regex = /[$-/:-?{-~!"^_`\[\]]/g; // "
 
@@ -64,15 +68,17 @@ export class PasswordStrengthBar implements OnChanges {
 
     ngOnChanges(changes: {[propName: string]: SimpleChange}): void {
         var password = changes['passwordToCheck'].currentValue;
-        if (password) {
-            let c = this.getColor(this.measureStrength(password));
-            let nativeElement = this.input.nativeElement;
-            console.log(nativeElement);
-            // nativeElement.removeClass('ng-hide');
-            // nativeElement.find('ul').children('li')
-            //     .css({ 'background-color': '#DDD' })
-            //     .slice(0, c.idx)
-            //     .css({ 'background-color': c.col });
+        for (let n = 0; n < 5; n++) {
+            this.setBarColor(n, '#DDD');
         }
+        if (password) {
+            let c = this.getColor(PasswordStrengthBar.measureStrength(password));
+            for (let n = 0; n < c.idx; n++) {
+                this.setBarColor(n, c.col);
+            }
+        }
+    }
+    private setBarColor(n, col) {
+        this['bar' + n] = col;
     }
 }
