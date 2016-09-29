@@ -1,5 +1,4 @@
 import {Component, OnChanges, Input, SimpleChange} from '@angular/core';
-declare var $: JQueryStatic;
 
 @Component({
     selector: 'password-strength-bar',
@@ -25,9 +24,11 @@ export class PasswordStrengthBar implements OnChanges {
         var _symbols = _regex.test(p);
 
         var _flags = [_lowerLetters, _upperLetters, _numbers, _symbols];
-        var _passedMatches = $.grep(_flags, function (el) {
-            return el === true;
-        }).length;
+
+        var _passedMatches = 0;
+        for (let _flag of _flags) {
+            _passedMatches += _flag === true ? 1 : 0;
+        }
 
         _force += 2 * p.length + ((p.length >= 10) ? 1 : 0);
         _force += _passedMatches * 10;
@@ -68,17 +69,15 @@ export class PasswordStrengthBar implements OnChanges {
 
     ngOnChanges(changes: {[propName: string]: SimpleChange}): void {
         var password = changes['passwordToCheck'].currentValue;
-        for (let n = 0; n < 5; n++) {
-            this.setBarColor(n, '#DDD');
-        }
+        this.setBarColors(5, '#DDD');
         if (password) {
             let c = this.getColor(PasswordStrengthBar.measureStrength(password));
-            for (let n = 0; n < c.idx; n++) {
-                this.setBarColor(n, c.col);
-            }
+            this.setBarColors(c.idx, c.col);
         }
     }
-    private setBarColor(n, col) {
-        this['bar' + n] = col;
+    private setBarColors(count, col) {
+        for (let _n = 0; _n < count; _n++) {
+            this['bar' + _n] = col;
+        }
     }
 }
