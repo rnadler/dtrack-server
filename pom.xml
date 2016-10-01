@@ -6,10 +6,7 @@
     <groupId>com.rdn</groupId>
     <artifactId>dtrack-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>dtrack-ui</module>
-    </modules>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <name>dtrack</name>
     <description>Data Tracker</description>
