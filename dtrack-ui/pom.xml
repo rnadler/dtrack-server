@@ -7,6 +7,10 @@
     <groupId>com.rdn</groupId>
     <artifactId>dtrack-ui</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <properties>
+        <maven-assembly-plugin.version>2.6</maven-assembly-plugin.version>
+        <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
+    </properties>
     <packaging>jar</packaging>
 
     <build>
@@ -30,6 +34,35 @@
                         <argument>build</argument>
                     </arguments>
                     <workingDirectory>.</workingDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>${maven-assembly-plugin.version}</version>
+                <configuration>
+                    <descriptor>assemblyBin.xml</descriptor>
+                    <finalName>dtrack-ui-${project.version}</finalName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>dist</directory>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
         </plugins>
