@@ -23,12 +23,16 @@ import {Register} from "./components/register/register";
 import {Login} from "./components/login/login"
 import { PasswordStrengthBar } from "./components/passwordStrengthBar/passwordStrengthBar"
 import {ShowAlertService} from './services/showAlertService'
+import { MyHttpService } from './services/myHttpService'
+import { LoginService } from './services/loginService'
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
   AppState,
-  ShowAlertService
+  ShowAlertService,
+  MyHttpService,
+  LoginService
 ];
 
 type StoreType = {
