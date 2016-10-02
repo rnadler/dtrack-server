@@ -1,5 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
-declare var showAlert: any;
+import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import {ShowAlertService} from "../../services/showAlertService";
+import {AppState} from "../../app.service";
 
 @Component({
     selector: 'log-alert',
@@ -10,18 +12,18 @@ export class LogAlert implements OnInit {
 
     public logoutAlert = {enabled: false, type: "success", msg: 'You have been logged out.'};
     public errorAlert = {enabled: false, type: "danger", msg: 'Invalid username and password.'};
-    private url;
 
-    constructor(@Inject('$timeout') public timeout, @Inject('$location') public location,
-                @Inject('User') public user) {
-        this.url = this.location.absUrl();
+    constructor(public appState: AppState, private showAlertService: ShowAlertService, public location : Location) {
+
     }
     ngOnInit() {
-        if (this.url.indexOf('error') > -1) {
-            showAlert(this.timeout, this.errorAlert);
-        } else if (this.url.indexOf('logout') > -1) {
-            this.user.clearUser();
-            showAlert(this.timeout, this.logoutAlert);
+        let url = this.location.path(false);
+        console.log('LogAlert: url=' + url);
+        if (url.indexOf('error') > -1) {
+            this.showAlertService.showAlert(this.errorAlert);
+        } else if (url.indexOf('logout') > -1) {
+            this.appState.set('value', '');
+            this.showAlertService.showAlert(this.logoutAlert);
         }
     }
 }

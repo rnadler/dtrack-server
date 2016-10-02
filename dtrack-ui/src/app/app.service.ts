@@ -33,6 +33,9 @@ export class AppState {
     return this._state[prop] = value;
   }
 
+  isLoggedIn() {
+    return this.get('value') == 'user';
+  }
 
   private _clone(object: InteralStateType) {
     // simple object clone

@@ -22,11 +22,13 @@ import {NotificationAlert} from './components/notificationAlert/notificationAler
 import {Register} from "./components/register/register";
 import {Login} from "./components/login/login"
 import { PasswordStrengthBar } from "./components/passwordStrengthBar/passwordStrengthBar"
+import {ShowAlertService} from './services/showAlertService'
 
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  AppState
+  AppState,
+  ShowAlertService
 ];
 
 type StoreType = {

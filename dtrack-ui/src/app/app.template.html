@@ -10,7 +10,7 @@
                 </button>
                 <a class="navbar-brand" [routerLink]=" ['./'] "><span>Data Tracker</span></a>
             </div>
-            <div *ngIf="appState.get('value') == 'user'">
+            <div *ngIf="appState.isLoggedIn()">
                 <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -22,7 +22,7 @@
                     </ul>
                 </div>
             </div>
-            <div *ngIf="appState.get('value') != 'user'">
+            <div *ngIf="!appState.isLoggedIn()">
                 <div class="collapse navbar-collapse" id="navbar-ex-collapse2">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <!--<notification-alert></notification-alert>-->
+    <notification-alert></notification-alert>
     <div class="well">
         <main>
             <router-outlet></router-outlet>
