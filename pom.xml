@@ -6,7 +6,7 @@
     <groupId>com.rdn</groupId>
     <artifactId>dtrack-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>dtrack</name>
     <description>Data Tracker</description>
@@ -21,6 +21,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <wrapper-maven-plugin.version>0.0.4</wrapper-maven-plugin.version>
+        <lombok.version>1.16.6</lombok.version>
+        <selenium-java.version>2.53.0</selenium-java.version>
+        <cglib-nodep.version>2.2.2</cglib-nodep.version>
+        <guava.version>19.0</guava.version>
+        <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
+        <mongeez.version>0.9.6</mongeez.version>
+        <mongo-java-driver.version>3.2.2</mongo-java-driver.version>
+        <jackson-datatype-jsr310.version>2.6.4</jackson-datatype-jsr310.version>
+        <json-path.version>2.2.0</json-path.version>
+        <maven-war-plugin.version>2.6</maven-war-plugin.version>
+        <json-path-assert.version>2.2.0</json-path-assert.version>
     </properties>
 
     <dependencies>
@@ -32,7 +44,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.6</version>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,7 +77,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.53.0</version>
+            <version>${selenium-java.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -84,45 +96,52 @@
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
-            <version>2.2.2</version>
+            <version>${cglib-nodep.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>19.0</version>
+            <version>${guava.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <version>${hibernate-jpa-2.1-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mongeez</groupId>
             <artifactId>mongeez</artifactId>
-            <version>0.9.6</version>
+            <version>${mongeez.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
-            <version>3.2.2</version>
+            <version>${mongo-java-driver.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.6.4</version>
+            <version>${jackson-datatype-jsr310.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
-            <version>2.2.0</version>
+            <version>${json-path.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path-assert</artifactId>
-            <version>2.2.0</version>
+            <version>${json-path-assert.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.rdn</groupId>
+            <artifactId>dtrack-ui</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <classifier>bin</classifier>
+            <type>zip</type>
         </dependency>
     </dependencies>
 
@@ -135,9 +154,25 @@
             <plugin>
                 <groupId>com.rimerosolutions.maven.plugins</groupId>
                 <artifactId>wrapper-maven-plugin</artifactId>
-                <version>0.0.4</version>
+                <version>${wrapper-maven-plugin.version}</version>
                 <configuration>
                     <mavenVersion>3.3.9</mavenVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${maven-war-plugin.version}</version>
+                <configuration>
+                    <overlays>
+                        <overlay>
+                            <groupId>com.rdn</groupId>
+                            <artifactId>dtrack-ui</artifactId>
+                            <classifier>bin</classifier>
+                            <type>zip</type>
+                            <targetPath>WEB-INF/classes/static</targetPath>
+                        </overlay>
+                    </overlays>
                 </configuration>
             </plugin>
         </plugins>
