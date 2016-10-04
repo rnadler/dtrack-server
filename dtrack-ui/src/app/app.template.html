@@ -8,16 +8,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" [routerLink]=" ['./'] "><span>Data Tracker</span></a>
+                <a class="navbar-brand" [routerLink]=" ['/'] "><span>Data Tracker</span></a>
             </div>
             <div *ngIf="appState.isLoggedIn()">
                 <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a [routerLink]=" ['./home'] "><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
+                            <a [routerLink]=" ['/main'] "><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</a>
                         </li>
                         <li>
-                            <a [routerLink]=" ['./data'] "><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Data</a>
+                            <a [routerLink]=" ['/data'] "><span class="glyphicon glyphicon-stats" aria-hidden="true"></span>&nbsp;Data</a>
                         </li>
                     </ul>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse" id="navbar-ex-collapse2">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a [routerLink]=" ['./register'] "><span class="glyphicon glyphicon-pencil" aria-hidden="true" id="register"></span>&nbsp;Register</a>
+                            <a [routerLink]=" ['/register'] "><span class="glyphicon glyphicon-pencil" aria-hidden="true" id="register"></span>&nbsp;Register</a>
                         </li>
                     </ul>
                 </div>

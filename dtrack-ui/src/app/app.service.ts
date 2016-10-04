@@ -6,6 +6,7 @@ export type InteralStateType = {
 
 @Injectable()
 export class AppState {
+  private static USER_PROP = 'user';
   _state: InteralStateType = { };
 
   constructor() {
@@ -33,8 +34,15 @@ export class AppState {
     return this._state[prop] = value;
   }
 
+  setUser(user: String) {
+    this.set(AppState.USER_PROP, user);
+  }
+  getUser() {
+    return this.get(AppState.USER_PROP);
+  }
+
   isLoggedIn() {
-    return this.get('value') == 'user';
+    return this.get(AppState.USER_PROP) == 'user';
   }
 
   private _clone(object: InteralStateType) {
