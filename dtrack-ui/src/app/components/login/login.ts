@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { AppState } from "../../app.service";
 import { LogAlert } from '../../components/logAlert/logAlert';
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
 
 
 @Component({
@@ -31,6 +31,10 @@ export class Login {
     }
 
     private ngOnInit() {
+        if (this.appState.isLoggedIn()) {
+            this.router.navigate(['/main']);
+            return;
+        }
         this.sub = this.route.params.subscribe(params => {
             if (params['param'] === 'logout') {
                 this.logAlert.showLogout();
@@ -38,6 +42,8 @@ export class Login {
         });
     }
     private ngOnDestroy() {
-        this.sub.unsubscribe();
+        if (this.sub) {
+            this.sub.unsubscribe();
+        }
     }
 }
