@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppState } from "../../app.service";
+import { LoginService } from '../../services/loginService';
 
 @Component ({
     selector: 'main-component',
@@ -9,13 +8,12 @@ import { AppState } from "../../app.service";
 export class MainComponent {
 
     public user: string;
-    constructor(private appState: AppState, private router: Router) {
-        this.user = appState.getUser();
+    constructor(private loginService: LoginService) {
+        this.user = loginService.checkSignedIn();
     }
 
     logout() {
         console.log("Logout");
-        this.appState.setUser('');
-        this.router.navigate(['/login', 'logout']);
+        this.loginService.successLogout();
     }
 }

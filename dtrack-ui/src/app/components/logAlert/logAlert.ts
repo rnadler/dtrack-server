@@ -14,11 +14,11 @@ export class LogAlert {
     constructor(private showAlertService: ShowAlertService) {
 
     }
-    showLogout() {
-        this.showAlertService.showAlert(this.logoutAlert);
+    showLogout(callback) {
+        this.showAlertService.showAlertCallback(this.logoutAlert, callback);
     }
-    showError() {
-        this.showAlertService.showAlert(this.errorAlert);
+    showError(callback) {
+        this.showAlertService.showAlertCallback(this.errorAlert, callback);
     }
 }
 

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShowAlertService} from "../../services/showAlertService";
-import {AppState} from "../../app.service";
+import { LoginService } from '../../services/loginService';
 
 @Component({
     selector: 'notification-alert',
@@ -14,15 +14,15 @@ export class NotificationAlert implements OnInit, OnDestroy {
     // constructor(@Inject('$timeout') private timeout, @Inject('$stomp') private stomp,
     //             @Inject('User') private user) {
     // }
-    constructor(public appState: AppState, private showAlertService: ShowAlertService) {
+    constructor(private loginService: LoginService, private showAlertService: ShowAlertService) {
 
     }
     ngOnInit() {
         // this.stomp.setDebug(function (args) {
         //     console.debug(args);
         // });
-        if (this.appState.isLoggedIn()) {
-            this.showAlertService.showAlertMsg(this.notificationAlert, 'User is logged in!');
+        if (this.loginService.isSignedIn()) {
+            this.showAlertService.showAlertMsg(this.notificationAlert, 'User ' + this.loginService.getUser() + ' is logged in!');
             // this.stomp.connect('/notification', {})
             //     .then((frame) => {
             //             this.stomp.subscribe('/user/topic/notifications', (payload, headers, res) => {

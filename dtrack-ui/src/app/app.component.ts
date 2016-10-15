@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { AppState } from './app.service';
+import { LoginService } from './services/loginService';
 
 /*
  * App Component
@@ -13,12 +13,8 @@ import { AppState } from './app.service';
 export class App {
 
   constructor(
-    public appState: AppState) {
+      private loginService: LoginService) {
 
-  }
-
-  ngOnInit() {
-    console.log('Initial App State');
   }
 
 }

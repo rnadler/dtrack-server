@@ -7,7 +7,7 @@ import { MainComponent } from './components/main/main';
 export const ROUTES: Routes = [
   { path: '',         component: Login },
   { path: 'register', component: Register },
-  { path: 'login/:param',    component: Login },
+  { path: 'login',    component: Login },
   { path: 'main',     component: MainComponent },
   { path: '**',        component: Login }
 ];

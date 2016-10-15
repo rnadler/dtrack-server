@@ -32,9 +32,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().and().authorizeRequests()
-                .antMatchers("/resources/**", "/actuator", "/notification/**", "/register", "/api/register").permitAll().anyRequest().authenticated()
+                .antMatchers("/",
+                        "/*.html",
+                        "/*.js",
+                        "/*.map",
+                        "/app/**/*",
+                        "/assets/**/*",
+                        "/libs/**/*").permitAll()
+                .antMatchers("/resources/**",
+                        "/actuator",
+                        "/notification/**",
+                        "/register",
+                        "/api/register").permitAll().anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/main").permitAll()
+                .formLogin()
+                .loginPage("/")
+                .loginProcessingUrl("/api/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll()
                 .and()
                 .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll()
                 .and().csrf().ignoringAntMatchers("/entries", "/api/**")
@@ -47,15 +63,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-    }
-
-    @Override
-    public void configure(WebSecurity security){
-        security.ignoring()
-                .antMatchers("/scripts/**/*.{js,html}")
-                .antMatchers("/bower_components/**")
-                .antMatchers("/node_modules/**")
-                .antMatchers("/images/**")
-                .antMatchers("/styles/**");
     }
 }
