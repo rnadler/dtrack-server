@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 /*
@@ -26,6 +27,8 @@ import { ShowAlertService } from './services/showAlertService';
 import { MyHttpService } from './services/myHttpService';
 import { LoginService } from './services/loginService';
 import { MainComponent } from './components/main/main';
+import { DataService } from './services/dataService'
+import { DataComponent } from "./components/dataComponent/dataComponent";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -33,7 +36,8 @@ const APP_PROVIDERS = [
   AppState,
   ShowAlertService,
   MyHttpService,
-  LoginService
+  LoginService,
+  DataService
 ];
 
 type StoreType = {
@@ -55,13 +59,15 @@ type StoreType = {
     Register,
     Login,
     PasswordStrengthBar,
-    MainComponent
+    MainComponent,
+    DataComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
     AlertModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
