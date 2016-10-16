@@ -23,6 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private AuthFailure authFailure;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -31,7 +34,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic().and().authorizeRequests()
+                .httpBasic().and()
+                .authorizeRequests()
                 .antMatchers("/",
                         "/*.html",
                         "/*.js",
@@ -46,11 +50,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/api/register").permitAll().anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/")
-                .loginProcessingUrl("/api/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .permitAll()
+                    .failureHandler(authFailure)
+                    .loginPage("/")
+                    .loginProcessingUrl("/api/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .permitAll()
                 .and()
                 .logout().invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll()
                 .and().csrf().ignoringAntMatchers("/entries", "/api/**")

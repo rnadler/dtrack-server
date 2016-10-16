@@ -9,7 +9,7 @@ import org.openqa.selenium.support.How;
 public class MainPage {
 
     @Getter
-    @FindBy(id = "signout")
+    @FindBy(id = "logout")
     private WebElement signoutButton;
 
     @Getter

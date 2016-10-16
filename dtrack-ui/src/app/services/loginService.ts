@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import { Router, NavigationExtras } from '@angular/router';
-import {MyHttpService} from "./myHttpService";
+import {MyHttpService, getCookie} from "./myHttpService";
 import {Headers, RequestOptions} from "@angular/http";
 
 @Injectable()
@@ -18,8 +18,8 @@ export class LoginService {
 
         return this.myhttp.post('/api/login', request, options)
             .map((res: any) =>  {
-                let xsrf = res.headers.get('XSRF-TOKEN');
-                console.log('LoginService: username=' + username + ' xsrf=' + xsrf);
+                let xsrf = getCookie('XSRF-TOKEN');
+                console.log('LoginService: username=' + username + ' xsrf-token=' + xsrf);
                 localStorage.setItem('token', xsrf);
                 localStorage.setItem('user', username);
             });
