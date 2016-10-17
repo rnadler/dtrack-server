@@ -34,10 +34,6 @@ export class Login {
     }
 
     private ngOnInit() {
-        if (this.loginService.isSignedIn()) {
-            this.router.navigate(['/main']);
-            return;
-        }
         this.sub = this.route.queryParams.subscribe(params => {
             let param = params['param'];
             // ToDo: This navigation clears any user input! Needs to be fixed.

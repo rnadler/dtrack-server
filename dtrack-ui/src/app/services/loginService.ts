@@ -42,13 +42,6 @@ export class LoginService {
     isSignedIn(): boolean {
         return localStorage.getItem('token') !== null;
     }
-    // ToDo: Replace with CanActivate service
-    checkSignedIn() {
-        if (!this.isSignedIn()) {
-            this.router.navigate(['/login']);
-        }
-        return this.getUser();
-    }
     private goToLogin(param) {
         let navigationExtras: NavigationExtras = {
             queryParams: { 'param': param }

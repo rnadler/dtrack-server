@@ -9,7 +9,7 @@ export class MainComponent {
 
     public user: string;
     constructor(private loginService: LoginService) {
-        this.user = loginService.checkSignedIn();
+        this.user = loginService.getUser();
     }
 
     logout() {
