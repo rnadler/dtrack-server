@@ -5,7 +5,7 @@
             <h1>Registration</h1>
 
             <div class="alert alert-success" [hidden]="!success" id="successMessage">
-                <strong>Registration saved!</strong> Go to the <a href="/login">Login page</a> to sign in.
+                <strong>Registration saved!</strong> Go to the <a [routerLink]=" ['/'] ">Login page</a> to sign in.
             </div>
 
             <div class="alert alert-danger" [hidden]="!error" id="failedMessage">

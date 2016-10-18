@@ -31,6 +31,7 @@ import { DataService } from './services/dataService'
 import { DataComponent } from "./components/dataComponent/dataComponent";
 import { ActivateIfSignedIn } from "./services/activateIfSignedIn";
 import { ActivateIfNotSignedIn } from "./services/activateIfNotSignedIn";
+import { RegisterService } from './services/registerService'
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -41,7 +42,8 @@ const APP_PROVIDERS = [
   LoginService,
   DataService,
   ActivateIfSignedIn,
-  ActivateIfNotSignedIn
+  ActivateIfNotSignedIn,
+  RegisterService
 ];
 
 type StoreType = {

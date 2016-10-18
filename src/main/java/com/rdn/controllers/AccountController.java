@@ -42,9 +42,9 @@ public class AccountController {
         produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<?> registerAccount(@Valid @RequestBody UserDTO userDTO, HttpServletRequest request) {
         return userRepository.findOneByLogin(userDTO.getLogin())
-            .map(user -> new ResponseEntity<>("login already in use", HttpStatus.BAD_REQUEST))
+            .map(user -> new ResponseEntity<>(jsonMessageString("login already in use"), HttpStatus.BAD_REQUEST))
             .orElseGet(() -> userRepository.findOneByEmail(userDTO.getEmail())
-                .map(user -> new ResponseEntity<>("e-mail address already in use", HttpStatus.BAD_REQUEST))
+                .map(user -> new ResponseEntity<>(jsonMessageString("e-mail address already in use"), HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
                     User user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(),
                     userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail().toLowerCase(),
@@ -59,7 +59,9 @@ public class AccountController {
                 })
         );
     }
-
+    private String jsonMessageString(String msg) {
+        return "{ \"message\" : \"" + msg + "\"}";
+    }
     /**
      * GET  /activate -> activate the registered user.
      */
