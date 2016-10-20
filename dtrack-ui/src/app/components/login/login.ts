@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LogAlert } from '../../components/logAlert/logAlert';
 import { Subscription } from "rxjs";
 import { LoginService } from '../../services/loginService';
+import { AppState } from '../../app.service'
 
 
 @Component({
@@ -11,13 +12,17 @@ import { LoginService } from '../../services/loginService';
 })
 
 export class Login {
+    private static readonly USERNAME_PROP = 'username';
+    private static readonly PASSWORD_PROP = 'password';
+
     @ViewChild(LogAlert) logAlert: LogAlert;
     private sub: Subscription;
     public login = {
         username: null,
         password: null
    };
-    constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService) {
+    constructor(private router: Router, private route: ActivatedRoute, private loginService: LoginService,
+        private appState: AppState) {
     }
 
     submit() {
@@ -36,16 +41,38 @@ export class Login {
     private ngOnInit() {
         this.sub = this.route.queryParams.subscribe(params => {
             let param = params['param'];
-            // ToDo: This navigation clears any user input! Needs to be fixed.
-            let callback = () => this.router.navigate(['/']);
             console.log("Login param: " + param);
             if (param === 'logout') {
-                this.logAlert.showLogout(callback)
+                this.logAlert.showLogout(this.callback)
             } else if (param === 'error') {
-                this.logAlert.showError(callback);
+                this.logAlert.showError(this.callback);
             }
+            this.getState();
         });
-    }
+    };
+    private callback = () => {
+        this.setState();
+        this.router.navigate(['/']);
+    };
+    private setState = () => {
+        this.setLoginProp(Login.USERNAME_PROP);
+        this.setLoginProp(Login.PASSWORD_PROP);
+    };
+    private getState = () => {
+        this.getLoginProp(Login.USERNAME_PROP);
+        this.getLoginProp(Login.PASSWORD_PROP);
+        this.clearState();
+    };
+    private clearState = () => {
+        this.appState.set(Login.USERNAME_PROP, null);
+        this.appState.set(Login.PASSWORD_PROP, null);
+    };
+    private setLoginProp = (prop) => {
+        this.appState.set(prop, this.login[prop]);
+    };
+    private getLoginProp = (prop) => {
+        this.login[prop] = this.appState.get(prop);
+    };
     private ngOnDestroy() {
         if (this.sub) {
             this.sub.unsubscribe();
