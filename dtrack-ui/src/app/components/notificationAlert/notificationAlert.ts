@@ -22,7 +22,6 @@ export class NotificationAlert implements OnInit, OnDestroy {
         //     console.debug(args);
         // });
         if (this.loginService.isSignedIn()) {
-            this.showAlertService.showAlertMsg(this.notificationAlert, 'User ' + this.loginService.getUser() + ' is logged in!');
             // this.stomp.connect('/notification', {})
             //     .then((frame) => {
             //             this.stomp.subscribe('/user/topic/notifications', (payload, headers, res) => {

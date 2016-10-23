@@ -48,7 +48,7 @@ public class MainPageTest {
     @Test
     public void testLogoutMessage() {
         LoginPageTest.loginSucessfully(loginPage);
-        mainPage.getSignoutButton().click();
+        mainPage.getLogoutLink().click();
         assertThat(loginPage.getLogoutMessage().getText(), is("You have been logged out."));
     }
 

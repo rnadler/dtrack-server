@@ -11,9 +11,4 @@ export class MainComponent {
     constructor(private loginService: LoginService) {
         this.user = loginService.getUser();
     }
-
-    logout() {
-        console.log("Logout");
-        this.loginService.successLogout();
-    }
 }

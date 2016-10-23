@@ -32,6 +32,7 @@ import { DataComponent } from "./components/dataComponent/dataComponent";
 import { ActivateIfSignedIn } from "./services/activateIfSignedIn";
 import { ActivateIfNotSignedIn } from "./services/activateIfNotSignedIn";
 import { RegisterService } from './services/registerService'
+import { Logout } from "./components/login/logout";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -66,7 +67,8 @@ type StoreType = {
     Login,
     PasswordStrengthBar,
     MainComponent,
-    DataComponent
+    DataComponent,
+    Logout
   ],
   imports: [ // import Angular's modules
     BrowserModule,

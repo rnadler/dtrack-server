@@ -10,7 +10,7 @@ public class MainPage {
 
     @Getter
     @FindBy(id = "logout")
-    private WebElement signoutButton;
+    private WebElement logoutLink;
 
     @Getter
     @FindBy(id = "sendNotification")
