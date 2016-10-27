@@ -21,15 +21,14 @@ export class AddEntry {
     submit() {
         this.entry.createdDateTime = AddEntry.getDateTime();
         this.entry.user = '';
-        console.log("AddEntry submit type=" + this.entry.type + " val=" + this.entry.value +
-            " createDT=" + this.entry.createdDateTime);
+        console.log("AddEntry submit: " + JSON.stringify(this.entry));
         this.dataService.addEntry(this.entry)
             .subscribe(
                 data => {
-                    console.log("Entry added successfully!")
+                    console.log("Entry added successfully! " + JSON.stringify(data));
                 },
                 error => {
-                    console.error("Failed to add data! " + error)
+                    console.error("Failed to add data! " + error);
                 }
             );
     }

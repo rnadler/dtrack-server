@@ -21,6 +21,6 @@ export class DataService {
         let options = new RequestOptions( {headers: headers} );
 
         return this.myhttp.post('/api/v1/entries', JSON.stringify(entry), options)
-            .map((res: Response) =>  {});
+            .map((res: Response) =>  res.json());
     }
 }
