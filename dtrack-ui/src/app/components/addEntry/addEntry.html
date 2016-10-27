@@ -13,9 +13,9 @@
                 <div class="form-group">
                     <label for="value" class="col-sm-2 control-label">Data Value:</label>
                     <div class="col-sm-10">
-                        <input type="value" class="form-control" id="value" name="value"
+                        <input type="number" class="form-control" id="value" name="value"
                                [(ngModel)]="entry.value" #value="ngModel"
-                               minlength="2" maxlength="50" required/>
+                               step="0.01" required/>
                     </div>
                 </div>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
