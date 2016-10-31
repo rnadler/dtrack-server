@@ -33,6 +33,8 @@
         <json-path.version>2.2.0</json-path.version>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
         <json-path-assert.version>2.2.0</json-path-assert.version>
+        <assertj-core.version>3.3.0</assertj-core.version>
+        <commons-lang3.version>3.4</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -60,10 +62,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -71,7 +69,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.3.0</version>
+            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,7 +89,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -159,6 +157,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.rimerosolutions.maven.plugins</groupId>
@@ -170,27 +175,11 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <overlays>
-                        <overlay>
-                            <groupId>com.rdn</groupId>
-                            <artifactId>dtrack-ui</artifactId>
-                            <classifier>bin</classifier>
-                            <type>zip</type>
-                            <targetPath>WEB-INF/classes/static</targetPath>
-                        </overlay>
-                    </overlays>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>unpack</id>
-                        <phase>prepare-package</phase>
+                        <phase>generate-test-resources</phase>
                         <goals>
                             <goal>unpack</goal>
                         </goals>
@@ -219,7 +208,6 @@
             <activeByDefault>true</activeByDefault>
         </activation>
         <properties>
-            <!-- log configuration -->
             <logback.loglevel>DEBUG</logback.loglevel>
         </properties>
     </profile>

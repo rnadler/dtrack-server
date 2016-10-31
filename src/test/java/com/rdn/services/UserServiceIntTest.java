@@ -1,18 +1,15 @@
 package com.rdn.services;
 
-import com.rdn.DtrackApplication;
 import com.rdn.model.PersistentToken;
 import com.rdn.model.User;
 import com.rdn.repositories.PersistentTokenRepository;
 import com.rdn.repositories.UserRepository;
 import com.rdn.services.utils.RandomUtil;
-import com.rdn.utils.TestContextInitializer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -29,9 +26,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @see UserService
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = DtrackApplication.class)
+@SpringBootTest
 @WebAppConfiguration
-@IntegrationTest
 public class UserServiceIntTest {
 
     @Autowired
