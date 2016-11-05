@@ -40,10 +40,10 @@ public class MainPageTest {
         loginPage = PageFactory.initElements(driver, LoginPage.class);
         mainPage = PageFactory.initElements(driver, MainPage.class);
         webDriverWait = new WebDriverWait(driver, 5);
-        waitForWebElementToBeVisible(loginPage.getUserName());
+        waitForWebElementToBeVisible(webDriverWait, loginPage.getUserName());
     }
-    private void waitForWebElementToBeVisible(WebElement webElement) {
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
+    public static void waitForWebElementToBeVisible(WebDriverWait waiter, WebElement webElement) {
+        waiter.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
     }
     @Test
     public void testLogoutMessage() {
@@ -59,7 +59,7 @@ public class MainPageTest {
         webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
         Thread.sleep(1000);  // Angular2 loads components asynchronously
         mainPage.getSendNotificationButton().click();
-        waitForWebElementToBeVisible(mainPage.getNotificationMessage());
+        waitForWebElementToBeVisible(webDriverWait, mainPage.getNotificationMessage());
         assertThat(mainPage.getNotificationMessage().getText().startsWith("Notification received"), is(true));
     }
 }
