@@ -1,3 +1,4 @@
 <div>
-    <alert [type]="alert.type" [hidden]="!alert.enabled" id="alertMessage">{{alert.message}}</alert>
+    <alert [type]="successAlert.type" [hidden]="!successAlert.enabled" id="successMessage">{{successAlert.message}}</alert>
+    <alert [type]="failureAlert.type" [hidden]="!failureAlert.enabled" id="failureMessage">{{failureAlert.message}}</alert>
 </div>

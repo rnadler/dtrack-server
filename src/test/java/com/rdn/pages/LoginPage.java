@@ -23,8 +23,12 @@ public class LoginPage {
     private WebElement signInButton;
 
     @Getter
-    @FindBy(how = How.ID, using = "alertMessage")
-    private WebElement alertMessage;
+    @FindBy(id = "successMessage")
+    private WebElement successMessage;
+
+    @Getter
+    @FindBy(id = "failureMessage")
+    private WebElement failureMessage;
 
     @Getter
     @FindBy(id = "version")

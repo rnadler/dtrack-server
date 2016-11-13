@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collections;
 
-import static java.util.Arrays.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -49,7 +48,7 @@ public class MainPageTest {
     public void testLogoutMessage() {
         LoginPageTest.loginSucessfully(loginPage);
         mainPage.getLogoutLink().click();
-        assertThat(loginPage.getAlertMessage().getText(), is("You have been logged out."));
+        assertThat(loginPage.getSuccessMessage().getText(), is("You have been logged out."));
     }
 
     // Currently not implemented

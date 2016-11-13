@@ -19,7 +19,7 @@ public class AddEntry {
     private WebElement addEntryButton;
 
     @Getter
-    @FindBy(id = "alertMessage")
-    private WebElement alertMessage;
+    @FindBy(id = "successMessage")
+    private WebElement successMessage;
 
 }

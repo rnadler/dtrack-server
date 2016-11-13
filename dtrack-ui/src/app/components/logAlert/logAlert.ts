@@ -8,7 +8,8 @@ import {ShowAlertService} from "../../services/showAlertService";
 
 export class LogAlert {
 
-    public alert = {enabled: false, type: 'success', message: ''};
+    public successAlert = {enabled: false, type: 'success', message: ''};
+    public failureAlert = {enabled: false, type: 'danger', message: ''};
 
     constructor(private showAlertService: ShowAlertService) {
 
@@ -17,9 +18,9 @@ export class LogAlert {
         this.showAlertCallback(alert, null);
     }
     showAlertCallback(alert, callback) {
-        this.alert.type = alert.type;
-        this.alert.message = alert.message;
-        this.showAlertService.showAlertCallback(this.alert, callback);
+        let alertType = alert.type === 'success' ? this.successAlert : this.failureAlert;
+        alertType.message = alert.message;
+        this.showAlertService.showAlertCallback(alertType, callback);
     }
 }
 
