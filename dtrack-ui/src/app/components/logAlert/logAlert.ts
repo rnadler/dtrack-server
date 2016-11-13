@@ -8,7 +8,7 @@ import {ShowAlertService} from "../../services/showAlertService";
 
 export class LogAlert {
 
-    public alert = {enabled: false, type: '', message: ''};
+    public alert = {enabled: false, type: 'success', message: ''};
 
     constructor(private showAlertService: ShowAlertService) {
 

@@ -14,8 +14,8 @@ import { AppState } from '../../app.service'
 export class Login {
     private static readonly USERNAME_PROP = 'username';
     private static readonly PASSWORD_PROP = 'password';
-    private logoutAlert = {type: "success", message: 'You have been logged out.'};
-    private errorAlert = {type: "danger", message: 'Invalid username and password.'};
+    private logoutAlert = {type: 'success', message: 'You have been logged out.'};
+    private errorAlert = {type: 'danger', message: 'Invalid username and password.'};
 
     @ViewChild(LogAlert) logAlert: LogAlert;
     private sub: Subscription;

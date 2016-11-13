@@ -1,9 +1,10 @@
 <div>
+    <log-alert #LogAlert></log-alert>
     <div class="row">
         <h4>Hello {{user}}</h4>
     </div>
     <div class="row">
         <h3>Add a Data Item</h3>
-        <add-entry></add-entry>
+        <add-entry (onMessage)="onMessage($event)"></add-entry>
     </div>
 </div>

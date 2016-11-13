@@ -6,10 +6,12 @@ import com.rdn.pages.LoginPage;
 import com.rdn.repositories.EntryRepository;
 import com.rdn.utils.SeleniumTest;
 import com.rdn.utils.TestContextInitializer;
+import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,9 @@ public class AddEntryTest {
         addEntry.getType().sendKeys("test1");
         addEntry.getValue().sendKeys("22.2");
         addEntry.getAddEntryButton().click();
-        Thread.sleep(1000);  // ToDo: Replace with test for confirmation message
+        WebElement alertMessage = addEntry.getAlertMessage();
+        MainPageTest.waitForWebElementToBeVisible(webDriverWait, alertMessage);
+        assertThat(alertMessage.getText(), is("Data was successfully added!"));
         List<Entry> entries = entryRepository.findByUserAndType("user", "test1");
         assertThat(entries.size(), is(1));
         assertThat(entries.get(0).getDoubleValue(), is(22.2));

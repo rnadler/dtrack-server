@@ -17,4 +17,9 @@ public class AddEntry {
     @Getter
     @FindBy(id = "addentry")
     private WebElement addEntryButton;
+
+    @Getter
+    @FindBy(id = "alertMessage")
+    private WebElement alertMessage;
+
 }

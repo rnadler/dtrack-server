@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter} from '@angular/core';
 import { DataService } from '../../services/dataService'
 
 
@@ -15,6 +15,10 @@ export class AddEntry {
         createdDateTime: null,
         user: null
     };
+    private successAlert = {type: 'success', message: 'Data was successfully added!'};
+    private failedAlert = {type: 'danger', message: 'Failed to add data!'};
+    @Output() onMessage = new EventEmitter<any>();
+
     constructor(private dataService: DataService) {
     }
 
@@ -26,9 +30,11 @@ export class AddEntry {
             .subscribe(
                 data => {
                     console.log("Entry added successfully! " + JSON.stringify(data));
+                    this.onMessage.emit(this.successAlert);
                 },
                 error => {
                     console.error("Failed to add data! " + error);
+                    this.onMessage.emit(this.failedAlert);
                 }
             );
     }
