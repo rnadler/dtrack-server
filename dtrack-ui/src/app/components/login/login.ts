@@ -14,6 +14,8 @@ import { AppState } from '../../app.service'
 export class Login {
     private static readonly USERNAME_PROP = 'username';
     private static readonly PASSWORD_PROP = 'password';
+    private logoutAlert = {type: "success", message: 'You have been logged out.'};
+    private errorAlert = {type: "danger", message: 'Invalid username and password.'};
 
     @ViewChild(LogAlert) logAlert: LogAlert;
     private sub: Subscription;
@@ -43,9 +45,9 @@ export class Login {
             let param = params['param'];
             console.log("Login param: " + param);
             if (param === 'logout') {
-                this.logAlert.showLogout(this.callback)
+                this.logAlert.showAlertCallback(this.logoutAlert, this.callback)
             } else if (param === 'error') {
-                this.logAlert.showError(this.callback);
+                this.logAlert.showAlertCallback(this.errorAlert, this.callback);
             }
             this.getState();
         });

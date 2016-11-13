@@ -8,17 +8,18 @@ import {ShowAlertService} from "../../services/showAlertService";
 
 export class LogAlert {
 
-    public logoutAlert = {enabled: false, type: "success", msg: 'You have been logged out.'};
-    public errorAlert = {enabled: false, type: "danger", msg: 'Invalid username and password.'};
+    public alert = {enabled: false, type: '', message: ''};
 
     constructor(private showAlertService: ShowAlertService) {
 
     }
-    showLogout(callback) {
-        this.showAlertService.showAlertCallback(this.logoutAlert, callback);
+    showAlert(alert) {
+        this.showAlertCallback(alert, null);
     }
-    showError(callback) {
-        this.showAlertService.showAlertCallback(this.errorAlert, callback);
+    showAlertCallback(alert, callback) {
+        this.alert.type = alert.type;
+        this.alert.message = alert.message;
+        this.showAlertService.showAlertCallback(this.alert, callback);
     }
 }
 

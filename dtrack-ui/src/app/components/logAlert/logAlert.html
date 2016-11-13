@@ -1,4 +1,3 @@
 <div>
-    <alert [type]="errorAlert.type"  [hidden]="!errorAlert.enabled" id="invalidMessage">{{errorAlert.msg}}</alert>
-    <alert [type]="logoutAlert.type" [hidden]="!logoutAlert.enabled" id="logoutMessage">{{logoutAlert.msg}}</alert>
+    <alert [type]="alert.type" [hidden]="!alert.enabled" id="alertMessage">{{alert.message}}</alert>
 </div>

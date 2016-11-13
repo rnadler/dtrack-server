@@ -9,7 +9,7 @@ import { LoginService } from '../../services/loginService';
 
 export class NotificationAlert implements OnInit, OnDestroy {
 
-    public notificationAlert = {enabled: false, type: "success"};
+    public notificationAlert = {enabled: false, type: "success", message: ''};
 
     // constructor(@Inject('$timeout') private timeout, @Inject('$stomp') private stomp,
     //             @Inject('User') private user) {
@@ -27,7 +27,8 @@ export class NotificationAlert implements OnInit, OnDestroy {
             //             this.stomp.subscribe('/user/topic/notifications', (payload, headers, res) => {
             //                     let message = 'Notification received. user=' + payload.user + ' type=' + payload.type;
             //                     console.debug(message);
-            //                 this.showAlertService.showAlertMsg(this.notificationAlert, message);
+            //                 this.notificationAlert.message = message;
+            //                 this.showAlertService.showAlertMsg(this.notificationAlert);
             //             }, {});
             //     });
         }

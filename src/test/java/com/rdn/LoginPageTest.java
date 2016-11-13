@@ -46,7 +46,7 @@ public class LoginPageTest {
         loginPage.getUserName().sendKeys("badusername");
         loginPage.getPassword().sendKeys("badpassword");
         loginPage.getSignInButton().click();
-        assertThat(loginPage.getInvalidMessage().getText(), is("Invalid username and password."));
+        assertThat(loginPage.getAlertMessage().getText(), is("Invalid username and password."));
     }
 
     public static void loginSucessfully(LoginPage page) {

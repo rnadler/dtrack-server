@@ -49,7 +49,7 @@ public class MainPageTest {
     public void testLogoutMessage() {
         LoginPageTest.loginSucessfully(loginPage);
         mainPage.getLogoutLink().click();
-        assertThat(loginPage.getLogoutMessage().getText(), is("You have been logged out."));
+        assertThat(loginPage.getAlertMessage().getText(), is("You have been logged out."));
     }
 
     // Currently not implemented
