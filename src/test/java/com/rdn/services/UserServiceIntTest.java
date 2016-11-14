@@ -30,6 +30,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @WebAppConfiguration
 public class UserServiceIntTest {
 
+    private static final String JOHN_DOE_EMAIL = "john.doe@localhost.com";
+    private static final String ADMIN_EMAIL = "admin@localhost.com";
+
     @Autowired
     private PersistentTokenRepository persistentTokenRepository;
 
@@ -43,7 +46,7 @@ public class UserServiceIntTest {
 
     @Before
     public void setUp() {
-        user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", "john.doe@localhost", "en-US");
+        user = userService.createUserInformation("johndoe", "johndoe", "John", "Doe", JOHN_DOE_EMAIL, "en-US");
     }
 
     @Test
@@ -60,20 +63,20 @@ public class UserServiceIntTest {
 
     @Test
     public void assertThatUserMustExistToResetPassword() {
-        Optional<User> maybeUser = userService.requestPasswordReset("john.doe@localhost");
+        Optional<User> maybeUser = userService.requestPasswordReset(JOHN_DOE_EMAIL);
         assertThat(maybeUser.isPresent()).isTrue();
 
-        maybeUser = userService.requestPasswordReset("admin@localhost");
+        maybeUser = userService.requestPasswordReset(ADMIN_EMAIL);
         assertThat(maybeUser.isPresent()).isTrue();
 
-        assertThat(maybeUser.get().getEmail()).isEqualTo("admin@localhost");
+        assertThat(maybeUser.get().getEmail()).isEqualTo(ADMIN_EMAIL);
         assertThat(maybeUser.get().getResetDate()).isNotNull();
         assertThat(maybeUser.get().getResetKey()).isNotNull();
     }
 
     @Test
     public void assertThatOnlyActivatedUserCanRequestPasswordReset() {
-        Optional<User> maybeUser = userService.requestPasswordReset("john.doe@localhost");
+        Optional<User> maybeUser = userService.requestPasswordReset(JOHN_DOE_EMAIL);
         assertThat(maybeUser.isPresent()).isTrue();
         userRepository.delete(user);
     }

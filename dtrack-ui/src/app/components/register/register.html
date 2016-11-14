@@ -31,7 +31,7 @@
                     <label class="control-label" for="login" >Username</label>
                     <input type="text" class="form-control" id="login" name="login" placeholder="Your username"
                            [(ngModel)]="registerAccount.login" #login="ngModel"
-                           minlength="2" maxlength="50" required>
+                           minlength="2" maxlength="50" required pattern="^[a-z0-9]*$">
                            <!--pattern="/^[a-z0-9]*$/" -->
                     <div *ngIf="login.errors && (login.dirty || login.touched)" id="usernameDirtyMessage">
                         <p class="alert alert-danger" *ngIf="login.errors.required">
@@ -43,16 +43,16 @@
                         <p class="alert alert-danger" *ngIf="login.errors.maxlength" >
                             Your username cannot be longer than 50 characters.
                         </p>
-                        <!--<p class="alert alert-danger" *ngIf="login.errors.pattern" >-->
-                            <!--Your username can only contain lower-case letters and digits.-->
-                        <!--</p>-->
+                        <p class="alert alert-danger" *ngIf="login.errors.pattern" >
+                            Your username can only contain lower-case letters and digits.
+                        </p>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="email">E-mail</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="Your e-mail"
                            [(ngModel)]="registerAccount.email" #email="ngModel"
-                           minlength="5" maxlength="100" required>
+                           minlength="5" maxlength="100" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                     <div *ngIf="email.errors && (email.dirty || email.touched)" id="emailDirtyMessage">
                         <p class="alert alert-danger"
                                [hidden]="!email.errors.required" >
@@ -69,6 +69,10 @@
                         <p class="alert alert-danger"
                                [hidden]="!email.errors.maxlength" >
                             Your e-mail cannot be longer than 100 characters.
+                        </p>
+                        <p class="alert alert-danger"
+                           [hidden]="!email.errors.pattern" >
+                            Your e-mail is invalid.
                         </p>
                     </div>
                 </div>

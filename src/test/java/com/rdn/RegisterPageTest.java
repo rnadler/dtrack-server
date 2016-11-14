@@ -69,19 +69,19 @@ public class RegisterPageTest {
 
     @Test
     public void testUserExistsMessage() throws InterruptedException {
-        setLoginAndEmail("user", "user@localhost", registerPage.getLoginExistsMessage());
+        setLoginAndEmail("user", "user@localhost.com", registerPage.getLoginExistsMessage());
         assertThat(registerPage.getLoginExistsMessage().getText(), is("Login name already registered! Please choose another one."));
     }
 
     @Test
     public void testEmailExistsMessage() throws InterruptedException {
-        setLoginAndEmail("user2", "user@localhost", registerPage.getEmailExistsMessage());
+        setLoginAndEmail("user2", "user@localhost.com", registerPage.getEmailExistsMessage());
         assertThat(registerPage.getEmailExistsMessage().getText(), is("E-mail is already in use! Please choose another one."));
     }
 
     @Test
     public void testSuccessMessage() throws InterruptedException {
-        setLoginAndEmail("user3", "user3@localhost", registerPage.getSuccessMessage());
+        setLoginAndEmail("user3", "user3@localhost.com", registerPage.getSuccessMessage());
         assertThat(registerPage.getSuccessMessage().getText(), is("Registration saved! Go to the Login page to sign in."));
     }
 
@@ -96,8 +96,8 @@ public class RegisterPageTest {
         WebElement login = registerPage.getLogin();
         sendAndClearChars(login, XX);
         assertThat(registerPage.getUsernameDirtyMessage().getText(), is("Your username is required."));
-//        login.sendKeys("xx-yy");
-//        assertThat(registerPage.getUsernameDirtyMessage().getText(), is("Your username can only contain lower-case letters and digits."));
+        login.sendKeys("xx-yy");
+        assertThat(registerPage.getUsernameDirtyMessage().getText(), is("Your username can only contain lower-case letters and digits."));
     }
 
     @Test
@@ -107,8 +107,8 @@ public class RegisterPageTest {
         assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is required."));
         email.sendKeys("xxyy");
         assertThat(registerPage.getEmailDirtyMessage().getText(), containsString("Your e-mail is required to be at least 5 characters."));
-//        email.sendKeys("xxxyzz");
-//        assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is invalid."));
+        email.sendKeys("xxxyzz@myhost");
+        assertThat(registerPage.getEmailDirtyMessage().getText(), is("Your e-mail is invalid."));
     }
 
     @Test
