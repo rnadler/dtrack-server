@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { RegisterAccount } from '../../model/registerAccount'
 import { RegisterService } from '../../services/registerService'
-import {Response} from "@angular/http";
-
+import { Response } from "@angular/http";
 
 @Component({
     selector: 'register',
     templateUrl: './register.html',
 })
-
 export class Register {
 
     public success = null;

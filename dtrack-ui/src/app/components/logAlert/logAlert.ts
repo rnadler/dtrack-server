@@ -1,11 +1,10 @@
-import {Component} from '@angular/core';
-import {ShowAlertService} from "../../services/showAlertService";
+import { Component } from '@angular/core';
+import { ShowAlertService } from "../../services/showAlertService";
 
 @Component({
     selector: 'log-alert',
     templateUrl: './logAlert.html'
 })
-
 export class LogAlert {
 
     public successAlert = {enabled: false, type: 'success', message: ''};

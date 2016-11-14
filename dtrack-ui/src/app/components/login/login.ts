@@ -5,12 +5,10 @@ import { Subscription } from "rxjs";
 import { LoginService } from '../../services/loginService';
 import { AppState } from '../../app.service'
 
-
 @Component({
     selector: 'login',
     templateUrl: './login.html'
 })
-
 export class Login {
     private static readonly USERNAME_PROP = 'username';
     private static readonly PASSWORD_PROP = 'password';

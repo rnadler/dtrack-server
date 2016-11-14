@@ -1,5 +1,4 @@
 <div>
-    <!-- https://angular.io/docs/ts/latest/cookbook/form-validation.html -->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h1>Registration</h1>
@@ -32,7 +31,6 @@
                     <input type="text" class="form-control" id="login" name="login" placeholder="Your username"
                            [(ngModel)]="registerAccount.login" #login="ngModel"
                            minlength="2" maxlength="50" required pattern="^[a-z0-9]*$">
-                           <!--pattern="/^[a-z0-9]*$/" -->
                     <div *ngIf="login.errors && (login.dirty || login.touched)" id="usernameDirtyMessage">
                         <p class="alert alert-danger" *ngIf="login.errors.required">
                             Your username is required.
@@ -117,7 +115,6 @@
                         </p>
                     </div>
                 </div>
-
                 <button type="submit" [disabled]="!registerForm.form.valid" class="btn btn-primary" id="registerButton">Register</button>
             </form>
         </div>

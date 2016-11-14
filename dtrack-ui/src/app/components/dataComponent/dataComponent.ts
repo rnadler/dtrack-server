@@ -2,12 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { DataService } from '../../services/dataService'
 import { LogAlert } from "../logAlert/logAlert";
 
-
 @Component({
     selector: 'data',
     templateUrl: './dataComponent.html'
 })
-
 export class DataComponent {
     public data: any;
     constructor(private dataService: DataService) {

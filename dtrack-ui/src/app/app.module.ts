@@ -6,11 +6,6 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
-/*
- * Platform and Environment providers/directives/pipes
- */
 import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
 // App is our top level component
