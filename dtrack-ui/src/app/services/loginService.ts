@@ -2,10 +2,15 @@ import {Injectable} from "@angular/core";
 import { Router, NavigationExtras } from '@angular/router';
 import {MyHttpService, getCookie} from "./myHttpService";
 import {Headers, RequestOptions} from "@angular/http";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class LoginService {
-    constructor(private myhttp: MyHttpService, private router: Router) { }
+    private _loginStatus: Subject<string>;
+    constructor(private myhttp: MyHttpService, private router: Router) {
+        //noinspection TypeScriptValidateTypes
+        this._loginStatus = new Subject();
+    }
 
     login(username: string, password: string) {
 
@@ -22,7 +27,11 @@ export class LoginService {
                 console.log('LoginService: username=' + username + ' xsrf-token=' + xsrf);
                 localStorage.setItem('token', xsrf);
                 localStorage.setItem('user', username);
+                this._loginStatus.next('login');
             });
+    }
+    get loginStatus() {
+        return this._loginStatus.asObservable();
     }
     getUser() {
         return localStorage.getItem('user');
@@ -36,6 +45,7 @@ export class LoginService {
     logout(param): void {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        this._loginStatus.next('logout');
         this.goToLogin(param);
     }
 

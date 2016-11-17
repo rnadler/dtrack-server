@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ShowAlertService } from "../../services/showAlertService";
 
 @Component({
@@ -7,8 +7,8 @@ import { ShowAlertService } from "../../services/showAlertService";
 })
 export class LogAlert {
 
-    public successAlert = {enabled: false, type: 'success', message: ''};
-    public failureAlert = {enabled: false, type: 'danger', message: ''};
+    public successAlert = {enabled: false, type: 'success', message: '', id: 'successMessage'};
+    public failureAlert = {enabled: false, type: 'danger', message: '', id: 'failureMessage'};
 
     constructor(private showAlertService: ShowAlertService) {
 
@@ -20,6 +20,10 @@ export class LogAlert {
         let alertType = alert.type === 'success' ? this.successAlert : this.failureAlert;
         alertType.message = alert.message;
         this.showAlertService.showAlertCallback(alertType, callback);
+    }
+    setPrefix(prefix) {
+        this.successAlert.id = prefix + this.successAlert.id;
+        this.failureAlert.id = prefix + this.failureAlert.id;
     }
 }
 

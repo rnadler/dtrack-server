@@ -29,6 +29,7 @@ import { ActivateIfNotSignedIn } from "./services/activateIfNotSignedIn";
 import { RegisterService } from './services/registerService'
 import { Logout } from "./components/login/logout";
 import { AddEntry } from "./components/addEntry/addEntry";
+import { STOMPService } from './services/stomp/stomp.service';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -40,7 +41,8 @@ const APP_PROVIDERS = [
   DataService,
   ActivateIfSignedIn,
   ActivateIfNotSignedIn,
-  RegisterService
+  RegisterService,
+  STOMPService
 ];
 
 type StoreType = {
