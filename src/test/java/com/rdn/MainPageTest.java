@@ -51,8 +51,7 @@ public class MainPageTest {
         assertThat(loginPage.getSuccessMessage().getText(), is("You have been logged out."));
     }
 
-    // Currently not implemented
-    //@Test
+    @Test
     public void testNotification() throws InterruptedException {
         LoginPageTest.loginSucessfully(loginPage);
         webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));

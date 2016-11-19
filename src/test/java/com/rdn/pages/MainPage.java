@@ -17,7 +17,7 @@ public class MainPage {
     private WebElement sendNotificationButton;
 
     @Getter
-    @FindBy(id = "notificationMessage")
+    @FindBy(id = "notifysuccessMessage")
     private WebElement notificationMessage;
 
 

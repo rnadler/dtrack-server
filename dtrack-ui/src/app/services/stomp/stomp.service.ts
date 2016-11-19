@@ -78,7 +78,7 @@ export class STOMPService {
         }
 
         // Attempt connection, passing in a callback
-        this.client = Stomp.client(`${scheme}://${this.config.host}:${this.config.port}/notification`);
+        this.client = Stomp.client(`${scheme}://${this.config.host}:${this.config.port}/notification/websocket`);
 
         // Configure client heartbeating
         this.client.heartbeat.incoming = this.config.heartbeat_in;
@@ -121,7 +121,9 @@ export class STOMPService {
 
     /** Disconnect the STOMP client and clean up */
     public disconnect(): void {
-
+        if (!this.client) {
+            return;
+        }
         // Notify observers that we are disconnecting!
         this.state.next(STOMPState.DISCONNECTING);
 

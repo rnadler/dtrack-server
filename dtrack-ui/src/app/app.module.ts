@@ -30,6 +30,7 @@ import { RegisterService } from './services/registerService'
 import { Logout } from "./components/login/logout";
 import { AddEntry } from "./components/addEntry/addEntry";
 import { STOMPService } from './services/stomp/stomp.service';
+import { UpdateComponent } from "./components/updateComponent/updateComponent";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -67,7 +68,8 @@ type StoreType = {
     MainComponent,
     DataComponent,
     Logout,
-    AddEntry
+    AddEntry,
+    UpdateComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,

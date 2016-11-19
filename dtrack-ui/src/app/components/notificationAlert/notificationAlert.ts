@@ -2,7 +2,8 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { LoginService } from '../../services/loginService';
 import { STOMPService, StompConfig } from '../../services/stomp';
 import { LogAlert} from "../logAlert/logAlert";
-import { Subscription} from "rxjs";
+import {Subscription, Observable} from "rxjs";
+import {Message} from "stompjs";
 
 @Component({
     selector: 'notification-alert',
@@ -15,14 +16,15 @@ export class NotificationAlert implements OnInit, OnDestroy {
     private stompConfig: StompConfig;
     @ViewChild('notificationAlert') logAlert: LogAlert;
     private sub: Subscription;
+    public messages: Observable<Message>;
 
     constructor(private loginService: LoginService, private stompService: STOMPService) {
         this.stompConfig = <StompConfig> {
-            "host": "example.com.invalid",
-            "port": 15671,
-            "ssl" : false,
-            "user": "username",
-            "pass": "changeme",
+            "host": window.location.hostname,
+            "port": +window.location.port,
+            "ssl" : window.location.protocol === 'https:',
+            "user": '',
+            "pass": '',
             "subscribe": ["/user/topic/notifications"],
             "publish": ["/app/update"],
             "heartbeat_in": 0,
@@ -44,21 +46,23 @@ export class NotificationAlert implements OnInit, OnDestroy {
         );
     }
     onLogin() {
-        // ToDo: For testing notification. Eventually remove.
-        //this.notify('User ' + this.loginService.getUser() + ' has logged in!');
-
-        // this.stompService.configure(this.stompConfig);
-        // this.stomp.connect('/notification', {})
-        //     .then((frame) => {
-        //             this.stomp.subscribe('/user/topic/notifications', (payload, headers, res) => {
-        //                     let message = 'Notification received. user=' + payload.user + ' type=' + payload.type;
-        //                     console.debug(message);
-        //                 this.notify(message);
-        //             }, {});
-        //     });
+        this.stompService.configure(this.stompConfig);
+        this.stompService.try_connect().then(this.on_connect);
     }
+    public on_connect = () => {
+        this.messages = this.stompService.messages;
+        this.messages.subscribe(this.on_next);
+    };
+
+    public on_next = (message: Message) => {
+        let data = JSON.parse(message.body);
+        let msg = 'Notification received. user=' + data.user + ' type=' + data.type;
+        console.debug(msg);
+        this.notify(msg);
+    };
+
     onLogout() {
-        //this.stompService.disconnect();
+        this.stompService.disconnect();
     }
     notify(message) {
         this.notificationAlert.message = message;
