@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { AlertModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartModule } from 'angular2-highcharts';
 import { ENV_PROVIDERS } from './environment';
 import { ROUTES } from './app.routes';
 // App is our top level component
@@ -76,6 +77,7 @@ type StoreType = {
     FormsModule,
     HttpModule,
     AlertModule,
+    ChartModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES, { useHash: true })
   ],

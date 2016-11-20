@@ -8,7 +8,18 @@ import { LogAlert } from "../logAlert/logAlert";
 })
 export class DataComponent {
     public data: any;
+    public chartOptions: any;
+    private chart: any;
     constructor(private dataService: DataService) {
+        this.chartOptions = {
+            chart: {
+                type: 'line',
+                zoomType: 'x'
+            },
+            title: { text: '' },
+            xAxis: { type: 'datetime' },
+            series: [{ name: '', color: 'black', data: [] }]
+        };
     }
 
     @ViewChild(LogAlert) logAlert: LogAlert;
@@ -27,6 +38,7 @@ export class DataComponent {
                     this.successAlert.message = 'Successfully loaded ' + length + ' data items.';
                     this.logAlert.showAlert(this.successAlert);
                     this.data = data;
+                    this.loadChartValues();
                 },
                 error => {
                     this.logAlert.showAlert(this.failedAlert);
@@ -34,4 +46,29 @@ export class DataComponent {
                 }
             );
     }
+    private static compare(a, b) {
+        if (a[0] < b[0])
+            return -1;
+        else if (a[0] > b[0])
+            return 1;
+        else
+            return 0;
+    }
+    saveInstance(chartInstance) {
+        console.log("DataComponent: loaded chart instance.");
+        this.chart = chartInstance;
+    }
+    private loadChartValues() {
+        var i,
+            values = [],
+            seriesName =  'All';
+        for (i = 0; i < this.data.length; i++) {
+            values.push([Date.parse(this.data[i].createdDateTime), parseFloat(this.data[i].value)]);
+        }
+        values.sort(DataComponent.compare);
+        let series = this.chart.series[0];
+        series.data =  values;
+        series.name = seriesName;
+        //this.chart.zoomOut();
+    };
 }
