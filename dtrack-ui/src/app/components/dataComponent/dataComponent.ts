@@ -67,8 +67,10 @@ export class DataComponent {
         }
         values.sort(DataComponent.compare);
         let series = this.chart.series[0];
-        series.data =  values;
+        for (i = 0; i < this.data.length; i++) {
+            series.addPoint(values[i]);
+        }
         series.name = seriesName;
-        //this.chart.zoomOut();
+        this.chart.zoomOut();
     };
 }
