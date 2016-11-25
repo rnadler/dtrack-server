@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Subject } from 'rxjs/Rx';
+import { Subject, Observable, Subscription} from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { StompConfig } from './';
@@ -46,7 +46,7 @@ export class STOMPService {
     private resolvePromise: { (...args: any[]): void };
 
     // Timer
-    private timer: NodeJS.Timer;
+    private timer: Subscription;
 
     /** Constructor */
     public constructor() {
@@ -129,7 +129,7 @@ export class STOMPService {
 
         // Abort reconnecting if in progress
         if (this.timer) {
-            clearTimeout(this.timer);
+            this.timer.unsubscribe();
             this.timer = null;
         }
 
@@ -220,10 +220,11 @@ export class STOMPService {
 
             // Attempt reconnection
             console.log('Reconnecting in 5 seconds...');
-            this.timer = setTimeout(() => {
+            this.timer = Observable.timer(5000).subscribe((t) =>
+            {
                 this.configure();
                 this.try_connect();
-            }, 5000);
+            });
         }
     }
 
