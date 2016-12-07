@@ -29,4 +29,6 @@ maven/
 *.map
 typings/
 **/dist
+/**/*.js
+/**/*.js.map
 
