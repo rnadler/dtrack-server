@@ -7,7 +7,7 @@ info:
   contact:
     name: Bob
     email: robert.nadler@gmail.com
-    url: ''
+    url: 'http://bobonmedicaldevicesoftware.com/blog/'
   license:
     name: MIT
     url: 'http://opensource.org/licenses/MIT'
@@ -20,8 +20,6 @@ securityDefinitions:
     type: basic
     description: HTTP Basic Authentication. Works over `HTTP` and `HTTPS`
 basePath: /api/v1
-schemes:
-  - http
 consumes:
   - application/json
 produces:
@@ -69,7 +67,7 @@ paths:
             $ref: '#/definitions/errorModel'
   '/entries/{id}':
     get:
-      description: 'Returns a user owned entry based on a single ID.'
+      description: Returns a user owned entry based on a single ID.
       operationId: findentryById
       security:
         - basicAuth: []
@@ -131,11 +129,11 @@ definitions:
       createdDateTime:
         type: string
       doubleValue:
-        type: double
+        type: number
   entry_array:
     type: array
     items:
-        $ref: '#/definitions/entry'
+      $ref: '#/definitions/entry'
   errorModel:
     type: object
     required:
