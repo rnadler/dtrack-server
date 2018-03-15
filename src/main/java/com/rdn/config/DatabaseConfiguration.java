@@ -1,6 +1,8 @@
 package com.rdn.config;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
 import com.rdn.model.util.JSR310DateConverters;
 import lombok.extern.slf4j.Slf4j;
 import org.mongeez.Mongeez;
@@ -22,6 +24,8 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 
 @Configuration
@@ -53,11 +57,6 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
         return mongoProperties.getDatabase();
     }
 
-    @Override
-    public Mongo mongo() throws Exception {
-        return mongo;
-    }
-
     @Bean
     public CustomConversions customConversions() {
         List<Converter<?, ?>> converters = new ArrayList<>();
@@ -80,5 +79,10 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
         mongeez.setDbName(mongoProperties.getDatabase());
         mongeez.process();
         return mongeez;
+    }
+
+    @Override
+    public MongoClient mongoClient() {
+        return new MongoClient(singletonList(new ServerAddress("127.0.0.1", 27017)));
     }
 }

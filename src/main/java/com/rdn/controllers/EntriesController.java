@@ -46,9 +46,10 @@ class EntriesController {
     ResponseEntity<?>  deleteEntry(Authentication authentication, @PathVariable String entryId) {
         String userId = authentication.getName();
         HttpStatus status = HttpStatus.OK;
-        boolean deleteIt = entryRepository.findByUserAndId(userId, entryId) != null;
+        Entry entry = entryRepository.findByUserAndId(userId, entryId);
+        boolean deleteIt = entry != null;
         if (deleteIt) {
-            entryRepository.delete(entryId);
+            entryRepository.delete(entry);
         } else {
             status = HttpStatus.FORBIDDEN;
         }

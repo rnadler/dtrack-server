@@ -1,9 +1,9 @@
 package com.rdn.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -16,15 +16,9 @@ public class Authority implements Serializable {
     @NotNull
     @Size(min = 0, max = 50)
     @Id
+    @Getter
+    @Setter
     private String name;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     @Override
     public boolean equals(Object o) {

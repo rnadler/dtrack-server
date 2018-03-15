@@ -42,7 +42,7 @@ public class MainPageTest {
         waitForWebElementToBeVisible(webDriverWait, loginPage.getUserName());
     }
     public static void waitForWebElementToBeVisible(WebDriverWait waiter, WebElement webElement) {
-        waiter.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
+//        waiter.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
     }
     @Test
     public void testLogoutMessage() {
@@ -54,7 +54,7 @@ public class MainPageTest {
     @Test
     public void testNotification() throws InterruptedException {
         LoginPageTest.loginSucessfully(loginPage);
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
+//        webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
         Thread.sleep(1000);  // Angular2 loads components asynchronously
         mainPage.getSendNotificationButton().click();
         waitForWebElementToBeVisible(webDriverWait, mainPage.getNotificationMessage());

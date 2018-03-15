@@ -1,5 +1,6 @@
 package com.rdn.services;
 
+import com.rdn.config.AuthoritiesConstants;
 import com.rdn.model.Authority;
 import com.rdn.model.ManagedUserDTO;
 import com.rdn.model.User;
@@ -85,7 +86,7 @@ public class UserService {
                                       String langKey) {
 
         User newUser = new User();
-        Authority authority = authorityRepository.findOne("ROLE_USER");
+        Authority authority = authorityRepository.findByName(AuthoritiesConstants.USER);
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(login);
@@ -119,7 +120,7 @@ public class UserService {
         if (managedUserDTO.getAuthorities() != null) {
             Set<Authority> authorities = new HashSet<>();
             managedUserDTO.getAuthorities().stream().forEach(
-                authority -> authorities.add(authorityRepository.findOne(authority))
+                authority -> authorities.add(authorityRepository.findByName(authority))
             );
             user.setAuthorities(authorities);
         }
@@ -167,10 +168,11 @@ public class UserService {
         });
     }
 
-    public User getUserWithAuthorities(String id) {
-        User user = userRepository.findOne(id);
-        user.getAuthorities().size(); // eagerly load the association
-        return user;
+    public Optional<User> getUserWithAuthorities(String id) {
+        return userRepository.findOneById(id).map(u -> {
+            u.getAuthorities().size();
+            return u;
+        });
     }
 
     public User getUserWithAuthorities() {

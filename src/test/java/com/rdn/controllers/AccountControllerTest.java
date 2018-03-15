@@ -287,6 +287,6 @@ public class AccountControllerTest {
         Optional<User> userDup = userRepository.findOneByLogin("badguy");
         assertThat(userDup.isPresent()).isTrue();
         assertThat(userDup.get().getAuthorities()).hasSize(1)
-            .containsExactly(authorityRepository.findOne(AuthoritiesConstants.USER));
+            .containsExactly(authorityRepository.findByName(AuthoritiesConstants.USER));
     }
 }
