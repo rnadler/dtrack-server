@@ -17,7 +17,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
-import org.springframework.data.mongodb.core.convert.CustomConversions;
+import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -58,7 +58,7 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
     }
 
     @Bean
-    public CustomConversions customConversions() {
+    public MongoCustomConversions customConversions() {
         List<Converter<?, ?>> converters = new ArrayList<>();
         converters.add(JSR310DateConverters.DateToZonedDateTimeConverter.INSTANCE);
         converters.add(JSR310DateConverters.ZonedDateTimeToDateConverter.INSTANCE);
@@ -66,7 +66,7 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
         converters.add(JSR310DateConverters.LocalDateToDateConverter.INSTANCE);
         converters.add(JSR310DateConverters.DateToLocalDateTimeConverter.INSTANCE);
         converters.add(JSR310DateConverters.LocalDateTimeToDateConverter.INSTANCE);
-        return new CustomConversions(converters);
+        return new MongoCustomConversions(converters);
     }
 
     @Bean

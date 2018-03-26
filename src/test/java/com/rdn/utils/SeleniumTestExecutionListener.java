@@ -34,7 +34,8 @@ public class SeleniumTestExecutionListener extends AbstractTestExecutionListener
         if (context instanceof ConfigurableApplicationContext) {
 
             SeleniumTest annotation = findAnnotation(testContext.getTestClass(), SeleniumTest.class);
-            webDriver = BeanUtils.instantiate(annotation.driver());
+            assert annotation != null;
+            webDriver = BeanUtils.instantiateClass(annotation.driver());
 
             ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) context;
             ConfigurableListableBeanFactory bf = configurableApplicationContext.getBeanFactory();
@@ -46,6 +47,7 @@ public class SeleniumTestExecutionListener extends AbstractTestExecutionListener
     public void beforeTestMethod(TestContext testContext) throws Exception {
         if (webDriver != null) {
             SeleniumTest annotation = findAnnotation(testContext.getTestClass(), SeleniumTest.class);
+            assert annotation != null;
             webDriver.get(annotation.baseUrl());
         }
     }
