@@ -15,6 +15,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Collections;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -39,7 +42,7 @@ public class MainPageTest {
         waitForWebElementToBeVisible(webDriverWait, loginPage.getUserName());
     }
     public static void waitForWebElementToBeVisible(WebDriverWait waiter, WebElement webElement) {
-//        waiter.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
+        waiter.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
     }
     @Test
     public void testLogoutMessage() {
