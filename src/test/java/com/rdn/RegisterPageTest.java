@@ -42,7 +42,7 @@ public class RegisterPageTest {
         LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
         WebElement register = loginPage.getRegister();
         webDriverWait = new WebDriverWait(driver, 5);
-//        webDriverWait.until(ExpectedConditions.elementToBeClickable(register));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(register));
         register.click();
         waitForWebElementToBeVisible(registerPage.getLogin());
     }
@@ -55,7 +55,7 @@ public class RegisterPageTest {
         waitForWebElementToBeVisible(webElement);
     }
     private void waitForWebElementToBeVisible(WebElement webElement) {
-//        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElements(Collections.singletonList(webElement)));
     }
 
     @Test

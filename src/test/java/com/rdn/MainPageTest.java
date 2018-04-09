@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -50,7 +51,7 @@ public class MainPageTest {
     @Test
     public void testNotification() throws InterruptedException {
         LoginPageTest.loginSucessfully(loginPage);
-//        webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(mainPage.getSendNotificationButton()));
         Thread.sleep(1000);  // Angular2 loads components asynchronously
         mainPage.getSendNotificationButton().click();
         waitForWebElementToBeVisible(webDriverWait, mainPage.getNotificationMessage());
