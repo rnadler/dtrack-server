@@ -48,7 +48,7 @@ public class MainPageTest {
     public void testLogoutMessage() {
         LoginPageTest.loginSucessfully(loginPage);
         mainPage.getLogoutLink().click();
-        assertThat(loginPage.getSuccessMessage().getText(), is("You have been logged out."));
+        assertThat(loginPage.getSuccessMessage().getText(), is("Success Message\nYou have been logged out."));
     }
 
     @Test
@@ -58,6 +58,6 @@ public class MainPageTest {
         Thread.sleep(1000);  // Angular2 loads components asynchronously
         mainPage.getSendNotificationButton().click();
         waitForWebElementToBeVisible(webDriverWait, mainPage.getNotificationMessage());
-        assertThat(mainPage.getNotificationMessage().getText().startsWith("Notification received"), is(true));
+        assertThat(mainPage.getNotificationMessage().getText().startsWith("Success Message\nNotification received"), is(true));
     }
 }

@@ -54,7 +54,7 @@ public class AddEntryTest {
         addEntry.getAddEntryButton().click();
         WebElement successMessage = addEntry.getSuccessMessage();
         MainPageTest.waitForWebElementToBeVisible(webDriverWait, successMessage);
-        assertThat(successMessage.getText(), is("Data was successfully added!"));
+        assertThat(successMessage.getText(), is("Success Message\nData was successfully added!"));
         List<Entry> entries = entryRepository.findByUserAndType("user", "test1");
         assertThat(entries.size(), is(1));
         assertThat(entries.get(0).getDoubleValue(), is(22.2));
