@@ -6,7 +6,6 @@ import com.mongodb.ServerAddress;
 import com.rdn.model.util.JSR310DateConverters;
 import lombok.extern.slf4j.Slf4j;
 import org.mongeez.Mongeez;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
@@ -34,11 +33,15 @@ import static java.util.Collections.singletonList;
 @Slf4j
 public class DatabaseConfiguration extends AbstractMongoConfiguration {
 
-    @Autowired
-    private Mongo mongo;
+    private static final String MONGEEZ_MASTER_XML = "/config/mongeez/master.xml";
 
-    @Autowired
+    private Mongo mongo;
     private MongoProperties mongoProperties;
+
+    public DatabaseConfiguration(Mongo mongo, MongoProperties mongoProperties) {
+        this.mongo = mongo;
+        this.mongoProperties = mongoProperties;
+    }
 
     @Bean
     public ValidatingMongoEventListener validatingMongoEventListener() {
@@ -70,9 +73,9 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
     @Bean
     @Profile("!fast")
     public Mongeez mongeez() {
-        log.debug("Configuring Mongeez");
+        log.debug("Configuring Mongeez: " + MONGEEZ_MASTER_XML);
         Mongeez mongeez = new Mongeez();
-        mongeez.setFile(new ClassPathResource("/config/mongeez/master.xml"));
+        mongeez.setFile(new ClassPathResource(MONGEEZ_MASTER_XML));
         mongeez.setMongo(mongo);
         mongeez.setDbName(mongoProperties.getDatabase());
         mongeez.process();
@@ -81,6 +84,7 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration {
 
     @Override
     public MongoClient mongoClient() {
-        return new MongoClient(singletonList(new ServerAddress("127.0.0.1", 27017)));
+        return new MongoClient(singletonList(new ServerAddress(
+                mongoProperties.getHost(), mongoProperties.getPort())));
     }
 }
